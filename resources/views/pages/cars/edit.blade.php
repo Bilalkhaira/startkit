@@ -13,86 +13,98 @@
         <!--begin::Card body-->
         <div class="card-body py-4">
             <!--begin::Table-->
-            <form id="regForm" action="{{ route('cars.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="regForm" action="{{ route('cars.update', $car->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h1 class="text-center">Add New Car Post</h1>
+                @method('PUT')
+                <h1 class="text-center">Update Car Post</h1>
                 <!-- One "tab" for each step in the form: -->
 
                 <div class="tab">
                     <h3 class="mb-5">Seller Data</h3>
 
-                    <p><b>Seller Name</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_name"></p>
-                    <p><b>Seller Contact Number</b><input placeholder="Last name..." oninput="this.className = ''" name="seller_phone"></p>
-                    <p><b>Seller Address</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_address"></p>
+                    <p><b> Name</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" value="{{ $car->seller_name ?? ''}}" name="seller_name" value="{{ $car->seller_name ?? ''}}"></p>
+                    <p><b> Contact Number</b><input type="number" placeholder="Last name..." oninput="this.className = ''" value="{{ $car->seller_phone ?? ''}}" name="seller_phone" value="{{ $car->seller_name ?? ''}}"></p>
+                    <p><b> Address</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" value="{{ $car->seller_address ?? ''}}" name="seller_address" value="{{ $car->seller_name ?? ''}}"></p>
+                    <p><b> Email</b><input type="email" placeholder="Seller email..." value="{{ $car->seller_email}}" oninput="this.className = ''" name="seller_email"></p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle Basic Data</h3>
-                    <p><b>Vehicle Name</b><input type="text" placeholder="Vehicle Name..." oninput="this.className = ''" name="vehicle_name"></p>
-                    <p><b>Body type</b><input type="text" placeholder="Body type..." oninput="this.className = ''" name="body_type"></p>
-                    <p><b>Type</b><input type="text" placeholder="Type..." oninput="this.className = ''" name="type"></p>
-                    <p><b>Drivetrain</b><input type="text" placeholder="Drivetrain..." oninput="this.className = ''" name="drivetrain"></p>
-                    <p><b>Seats</b><input type="number" placeholder="Seats..." oninput="this.className = ''" name="seats"></p>
-                    <p><b>Doors</b><input type="number" placeholder="Doors..." oninput="this.className = ''" name="doors"></p>
-                    <p><b>Offer number</b><input type="text" placeholder="Offer number..." oninput="this.className = ''" name="offer_number"></p>
-                    <p><b>Warranty</b><input type="text" placeholder="Warranty..." oninput="this.className = ''" name="warranty"></p>
+                    <p><b> Name</b><input type="text" placeholder="Vehicle Name..." oninput="this.className = ''" name="vehicle_name" value="{{ $car->vehicle_name ?? ''}}"></p>
+                    <p><b> Price</b><input type="number" placeholder="Vehicle Price..." oninput="this.className = ''" name="vehicle_price" value="{{ $car->vehicle_price ?? ''}}"></p>
+                    <p><b>Body type</b><input type="text" placeholder="Body type..." oninput="this.className = ''" name="body_type" value="{{ $car->body_type ?? ''}}"></p>
+                    <p><b>Type</b><input type="text" placeholder="Type..." oninput="this.className = ''" name="type" value="{{ $car->type ?? ''}}"></p>
+                    <p><b>Drivetrain</b><input type="text" placeholder="Drivetrain..." oninput="this.className = ''" name="drivetrain" value="{{ $car->drivetrain ?? ''}}"></p>
+                    <p><b>Seats</b><input type="number" placeholder="Seats..." oninput="this.className = ''" name="seats" value="{{ $car->seats ?? ''}}"></p>
+                    <p><b>Doors</b><input type="number" placeholder="Doors..." oninput="this.className = ''" name="doors" value="{{ $car->doors ?? ''}}"></p>
+                    <p><b>Offer number</b><input type="text" placeholder="Offer number..." oninput="this.className = ''" name="offer_number" value="{{ $car->offer_number ?? ''}}"></p>
+                    <p><b>Warranty</b><input type="text" placeholder="Warranty..." oninput="this.className = ''" name="warranty" value="{{ $car->warranty ?? ''}}"></p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle History</h3>
-                    <p><b>Mileage</b><input placeholder="Mileage" type="number" oninput="this.className = ''" name="mileage"></p>
-                    <p><b>First registration</b><input placeholder="First registration" type="number" oninput="this.className = ''" name="first_registration"></p>
+                    <p><b>Mileage</b><input placeholder="Mileage" type="text" oninput="this.className = ''" name="mileage" value="{{ $car->mileage ?? ''}}"></p>
+                    <p><b>First registration</b><input placeholder="First registration" type="date" oninput="this.className = ''" name="first_registration" value="{{ $car->first_registration ?? ''}}"></p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Technical Data</h3>
-                    <p><b>Power</b><input placeholder="Power..." oninput="this.className = ''" name="power"></p>
-                    <p><b>Gearbox</b><input placeholder="Gearbox..." oninput="this.className = ''" name="gearbox"></p>
-                    <p><b>Engine size</b><input placeholder="Engine size..." oninput="this.className = ''" name="engine_size"></p>
-                    <p><b>Gears</b><input placeholder="Gears..." oninput="this.className = ''" name="gears"></p>
-                    <p><b>Cylinders</b><input placeholder="Cylinders..." oninput="this.className = ''" name="cylinders"></p>
-                    <p><b>Empty weight</b><input placeholder="Empty weight..." oninput="this.className = ''" name="empty_weight"></p>
+                    <p><b>Power</b><input type="text" placeholder="Power..." oninput="this.className = ''" name="power" value="{{ $car->power ?? ''}}"></p>
+                    <p><b>Gearbox</b><input placeholder="Gearbox..." oninput="this.className = ''" name="gearbox" value="{{ $car->gearbox ?? ''}}"></p>
+                    <p><b>Engine size</b><input type="text" placeholder="Engine size..." oninput="this.className = ''" name="engine_size" value="{{ $car->engine_size ?? ''}}"></p>
+                    <p><b>Gears</b><input type="number" placeholder="Gears..." oninput="this.className = ''" name="gears" value="{{ $car->gears ?? ''}}"></p>
+                    <p><b>Cylinders</b><input type="number" placeholder="Cylinders..." oninput="this.className = ''" name="cylinders" value="{{ $car->cylinders ?? ''}}"></p>
+                    <p><b>Empty weight</b><input type="text" placeholder="Empty weight..." oninput="this.className = ''" name="empty_weight" value="{{ $car->empty_weight ?? ''}}"></p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Energy Consumption</h3>
-                    <p><b>Fuel type</b><input placeholder="Fuel type..." oninput="this.className = ''" name="fuel_type"></p>
-                    <p><b>Fuel consumption2</b><input placeholder="Fuel consumption2..." oninput="this.className = ''" name="fuel_consumption2"></p>
-                    <p><b>CO₂-emissions2</b><input placeholder="CO₂-emissions2..." oninput="this.className = ''" name="COemissions"></p>
-                    <p><b>Emission class</b><input placeholder="Emission class..." oninput="this.className = ''" name="emission_class"></p>
+                    <p><b>Fuel type</b><input type="text" placeholder="Fuel type..." oninput="this.className = ''" name="fuel_type" value="{{ $car->fuel_type ?? ''}}"></p>
+                    <p><b>Fuel consumption2</b><input type="text" placeholder="Fuel consumption2..." oninput="this.className = ''" name="fuel_consumption2" value="{{ $car->fuel_consumption_2 ?? ''}}"></p>
+                    <p><b>CO₂-emissions2</b><input type="text" placeholder="CO₂-emissions2..." oninput="this.className = ''" name="COemissions" value="{{ $car->COemissions ?? ''}}"></p>
+                    <p><b>Emission class</b><input type="text" placeholder="Emission class..." oninput="this.className = ''" name="emission_class" value="{{ $car->emission_class ?? ''}}"></p>
                 </div>
 
                 <div class="tab">
                     <h3 class="mb-5">Equipment</h3>
-                    <p><b>Comfort & Convenience</b><textarea placeholder="Comfort and Convenience..." oninput="this.className = ''" name="comfort_convenience"></textarea></p>
-                    <p><b>Entertainment & Media</b><textarea placeholder="Entertainment & Media..." oninput="this.className = ''" name="entertainment_media"></textarea></p>
-                    <p><b>Safety & Security</b><textarea placeholder="Safety and Security..." oninput="this.className = ''" name="safety_security"></textarea></p>
-                    <p><b>Extras</b><textarea placeholder="Extras..." oninput="this.className = ''" name="extras"></textarea></p>
+                    <p><b>Comfort & Convenience</b><textarea placeholder="Comfort and Convenience..." oninput="this.className = ''" name="comfort_convenience">{{ $car->comfort_convenience ?? ''}}</textarea></p>
+                    <p><b>Entertainment & Media</b><textarea placeholder="Entertainment & Media..." oninput="this.className = ''" name="entertainment_media">{{ $car->entertainment_media ?? ''}}</textarea></p>
+                    <p><b>Safety & Security</b><textarea placeholder="Safety and Security..." oninput="this.className = ''" name="safety_security">{{ $car->safety_security ?? ''}}</textarea></p>
+                    <p><b>Extras</b><textarea placeholder="Extras..." oninput="this.className = ''" name="extras">{{ $car->extras ?? ''}}</textarea></p>
                 </div>
 
                 <div class="tab">
                     <h3 class="mb-5">Colour and Upholstery</h3>
-                    <p><b>Colour</b><input placeholder="Colour..." oninput="this.className = ''" name="colour"></p>
-                    <p><b>Manufacturer colour</b><input placeholder="Manufacturer colour..." oninput="this.className = ''" name="manufacturer_colour"></p>
-                    <p><b>Upholstery colour</b><input placeholder="Upholstery colour..." oninput="this.className = ''" name="upholstery_colour"></p>
-                    <p><b>Upholstery</b><input placeholder="Upholstery..." oninput="this.className = ''" name="upholstery"></p>
+                    <p><b>Colour</b><input type="text" placeholder="Colour..." oninput="this.className = ''" name="colour" value="{{ $car->colour ?? ''}}"></p>
+                    <p><b>Manufacturer colour</b><input type="text" placeholder="Manufacturer colour..." oninput="this.className = ''" name="manufacturer_colour" value="{{ $car->manufacturer_colour ?? ''}}"></p>
+                    <p><b>Upholstery colour</b><input type="text" placeholder="Upholstery colour..." oninput="this.className = ''" name="upholstery_colour" value="{{ $car->upholstery_colour ?? ''}}"></p>
+                    <p><b>Upholstery</b><input type="text" placeholder="Upholstery..." oninput="this.className = ''" name="upholstery" value="{{ $car->upholstery ?? ''}}"></p>
                 </div>
 
                 <div class="tab">
-                    <p><b>Vehicle Description</b><textarea placeholder="Vehicle Description..." oninput="this.className = ''" name="vehicle_description"></textarea></p>
+                    <p><b>Vehicle Description</b><textarea placeholder="Vehicle Description..." oninput="this.className = ''" name="vehicle_description">{{ $car->description ?? ''}}</textarea></p>
                     <div class="row">
                         <div class="col-lg-12">
                             <label>Vehicle Images:</label></br>
                             <input name="images[]" id="fuUpload1" type="file" multiple="multiple" />
                             <div id="dvPreview" style="margin-bottom: 10px"></div>
-
-                            <div class="col-lg-12">
-                                <div class="row" id="img_append"></div>
-                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        @if(!empty($car->images[0]))
+                        @foreach($car->images as $image)
+                        <div class="col-lg-2 img_main">
+                            <img src="{{ asset('images/'.$image->images) }}" width="100%" class="mt-8">
+                            <i class="fa fa-trash" id="img_dlt_btn"></i>
+                            <input id="imgId" type="hidden" value="{{ $image->id ??  ''}}">
+                        </div>
+                        @endforeach
+                        @endif
+                    </div>
                 </div>
+
 
                 <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                        <input type="hidden" name="updateId" value="{{ $car->id ?? ''}}">
                     </div>
                 </div>
                 <!-- Circles which indicates the steps of the form: -->
@@ -113,6 +125,32 @@
     </div>
     @push('scripts')
     <script>
+        $(document).on("click", "#img_dlt_btn", function(e) {
+            e.preventDefault();
+            var carId = $(this).closest('div').find("#imgId").val();
+            $(this).closest("div").css('display', 'none');
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+
+            $.ajax({
+                url: "{{ route('cars.imgDelete') }}" + "/" + carId,
+                type: "GET",
+                dataType: "json",
+
+                success: function(data) {
+                   
+                }
+            });
+        });
+
+
+
+
+
+
         var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab
 
@@ -160,15 +198,15 @@
             x = document.getElementsByClassName("tab");
             y = x[currentTab].getElementsByTagName("input");
             // A loop that checks every input field in the current tab:
-            for (i = 0; i < y.length; i++) {
-                // If a field is empty...
-                if (y[i].value == "") {
-                    // add an "invalid" class to the field:
-                    y[i].className += " invalid";
-                    // and set the current valid status to false
-                    valid = false;
-                }
-            }
+            // for (i = 0; i < y.length; i++) {
+            //     // If a field is empty...
+            //     if (y[i].value == "") {
+            //         // add an "invalid" class to the field:
+            //         y[i].className += " invalid";
+            //         // and set the current valid status to false
+            //         valid = false;
+            //     }
+            // }
             // If the valid status is true, mark the step as finished and valid:
             if (valid) {
                 document.getElementsByClassName("step")[currentTab].className += " finish";

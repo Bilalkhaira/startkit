@@ -16,7 +16,6 @@ class CarController extends Controller
      */
     public function index(CarsDataTable $dataTable)
     {
-        // dd('oo');
         return $dataTable->render('pages.cars.list');
     }
 
@@ -33,12 +32,13 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $newRecord = Car::create([
             'seller_name' => $request->seller_name,
             'seller_phone' => $request->seller_phone,
             'seller_address' => $request->seller_address,
+            'seller_email' => $request->seller_email,
             'vehicle_name' => $request->vehicle_name,
+            'vehicle_price' => $request->vehicle_price,
             'gearbox' => $request->gearbox,
             'first_registration' => $request->first_registration,
             'power' => $request->power,
@@ -56,7 +56,7 @@ class CarController extends Controller
             'empty_weight' => $request->empty_weight,
             'fuel_type' => $request->fuel_type,
             'fuel_consumption_2' => $request->fuel_consumption2,
-            'CO₂-emissions' => $request->COemissions,
+            'COemissions' => $request->COemissions,
             'emission_class' => $request->emission_class,
             'comfort_convenience' => $request->comfort_convenience,
             'entertainment_media' => $request->entertainment_media,
@@ -93,25 +93,85 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Car $user)
+    public function show($id)
     {
-        return view('pages.cars.show', compact('user'));
+        $car = Car::with('images')->where('id', $id)->first();
+        return view('pages.cars.show', compact('car'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Car $user)
+    public function edit($id)
     {
-        //
+        $car = Car::with('images')->where('id', $id)->first();
+
+        return view('pages.cars.edit', compact('car'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Car $user)
+    public function update(Request $request)
     {
-        //
+        $updateRecord = Car::find($request->updateId);
+
+        $updateRecord->update([
+            'seller_name' => $request->seller_name,
+            'seller_phone' => $request->seller_phone,
+            'seller_address' => $request->seller_address,
+            'seller_email' => $request->seller_email,
+            'vehicle_name' => $request->vehicle_name,
+            'vehicle_price' => $request->vehicle_price,
+            'gearbox' => $request->gearbox,
+            'first_registration' => $request->first_registration,
+            'power' => $request->power,
+            'body_type' => $request->body_type,
+            'type' => $request->type,
+            'drivetrain' => $request->drivetrain,
+            'seats' => $request->seats,
+            'doors' => $request->doors,
+            'offer_number' => $request->offer_number,
+            'warranty' => $request->warranty,
+            'mileage' => $request->mileage,
+            'engine_size' => $request->engine_size,
+            'gears' => $request->gears,
+            'cylinders' => $request->cylinders,
+            'empty_weight' => $request->empty_weight,
+            'fuel_type' => $request->fuel_type,
+            'fuel_consumption_2' => $request->fuel_consumption2,
+            'COemissions' => $request->COemissions,
+            'emission_class' => $request->emission_class,
+            'comfort_convenience' => $request->comfort_convenience,
+            'entertainment_media' => $request->entertainment_media,
+            'safety_security' => $request->safety_security,
+            'extras' => $request->extras,
+            'colour' => $request->colour,
+            'manufacturer_colour' => $request->manufacturer_colour,
+            'upholstery_colour' => $request->upholstery_colour,
+            'upholstery' => $request->upholstery,
+            'description' => $request->vehicle_description,
+        ]);
+
+
+        if (!empty($request->images[0])) {
+            foreach ($request->images as $image) {
+
+                $imgpath = public_path('images/');
+
+                $imageName = $image->getClientOriginalName();
+                $image->move($imgpath, $imageName);
+
+                CarImages::create([
+                    'car_id' => $request->updateId ?? '',
+                    'images' => $imageName ?? ''
+                ]);
+            }
+        }
+
+        toastr()->success('Record Updated Successfully');
+
+        return redirect()->back();
     }
 
     /**
@@ -129,7 +189,7 @@ class CarController extends Controller
                 File::delete($path);
             }
         }
-        
+
         $car = Car::findOrFail($id);
 
         $car->delete();
@@ -139,5 +199,21 @@ class CarController extends Controller
         toastr()->success('Deleted Successfully');
 
         return redirect()->route('cars.index');
+    }
+
+    public function imgDelete($id)
+    {
+        $imgpath = public_path('images/');
+        $imgRecord = CarImages::find($id);
+        $path = $imgpath . $imgRecord->images;
+
+        if (File::exists($path)) {
+            File::delete($path);
+        }
+
+        $imgRecord->delete();
+
+        return response()->json('true');
+
     }
 }

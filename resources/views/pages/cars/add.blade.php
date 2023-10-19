@@ -21,13 +21,15 @@
                 <div class="tab">
                     <h3 class="mb-5">Seller Data</h3>
 
-                    <p><b>Seller Name</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_name"></p>
-                    <p><b>Seller Contact Number</b><input placeholder="Last name..." oninput="this.className = ''" name="seller_phone"></p>
-                    <p><b>Seller Address</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_address"></p>
+                    <p><b> Name</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_name"></p>
+                    <p><b> Contact Number</b><input type="number" placeholder="Last name..." oninput="this.className = ''" name="seller_phone"></p>
+                    <p><b> Address</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_address"></p>
+                    <p><b> Email</b><input type="email" placeholder="Seller email..." oninput="this.className = ''" name="seller_email"></p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle Basic Data</h3>
-                    <p><b>Vehicle Name</b><input type="text" placeholder="Vehicle Name..." oninput="this.className = ''" name="vehicle_name"></p>
+                    <p><b> Name</b><input type="text" placeholder="Vehicle Name..." oninput="this.className = ''" name="vehicle_name"></p>
+                    <p><b> Price</b><input type="number" placeholder="Vehicle Price..." oninput="this.className = ''" name="vehicle_price"></p>
                     <p><b>Body type</b><input type="text" placeholder="Body type..." oninput="this.className = ''" name="body_type"></p>
                     <p><b>Type</b><input type="text" placeholder="Type..." oninput="this.className = ''" name="type"></p>
                     <p><b>Drivetrain</b><input type="text" placeholder="Drivetrain..." oninput="this.className = ''" name="drivetrain"></p>
@@ -38,24 +40,24 @@
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle History</h3>
-                    <p><b>Mileage</b><input placeholder="Mileage" type="number" oninput="this.className = ''" name="mileage"></p>
-                    <p><b>First registration</b><input placeholder="First registration" type="number" oninput="this.className = ''" name="first_registration"></p>
+                    <p><b>Mileage</b><input placeholder="Mileage" type="text" oninput="this.className = ''" name="mileage"></p>
+                    <p><b>First registration</b><input placeholder="First registration" type="date" oninput="this.className = ''" name="first_registration"></p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Technical Data</h3>
-                    <p><b>Power</b><input placeholder="Power..." oninput="this.className = ''" name="power"></p>
-                    <p><b>Gearbox</b><input placeholder="Gearbox..." oninput="this.className = ''" name="gearbox"></p>
-                    <p><b>Engine size</b><input placeholder="Engine size..." oninput="this.className = ''" name="engine_size"></p>
-                    <p><b>Gears</b><input placeholder="Gears..." oninput="this.className = ''" name="gears"></p>
-                    <p><b>Cylinders</b><input placeholder="Cylinders..." oninput="this.className = ''" name="cylinders"></p>
-                    <p><b>Empty weight</b><input placeholder="Empty weight..." oninput="this.className = ''" name="empty_weight"></p>
+                    <p><b>Power</b><input placeholder="Power..." type="text" oninput="this.className = ''" name="power"></p>
+                    <p><b>Gearbox</b><input type="text" placeholder="Gearbox..." oninput="this.className = ''" name="gearbox"></p>
+                    <p><b>Engine size</b><input type="text" placeholder="Engine size..." oninput="this.className = ''" name="engine_size"></p>
+                    <p><b>Gears</b><input type="number" placeholder="Gears..." oninput="this.className = ''" name="gears"></p>
+                    <p><b>Cylinders</b><input type="number" placeholder="Cylinders..." oninput="this.className = ''" name="cylinders"></p>
+                    <p><b>Empty weight</b><input type="text" placeholder="Empty weight..." oninput="this.className = ''" name="empty_weight"></p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Energy Consumption</h3>
-                    <p><b>Fuel type</b><input placeholder="Fuel type..." oninput="this.className = ''" name="fuel_type"></p>
-                    <p><b>Fuel consumption2</b><input placeholder="Fuel consumption2..." oninput="this.className = ''" name="fuel_consumption2"></p>
-                    <p><b>CO₂-emissions2</b><input placeholder="CO₂-emissions2..." oninput="this.className = ''" name="COemissions"></p>
-                    <p><b>Emission class</b><input placeholder="Emission class..." oninput="this.className = ''" name="emission_class"></p>
+                    <p><b>Fuel type</b><input type="text" placeholder="Fuel type..." oninput="this.className = ''" name="fuel_type"></p>
+                    <p><b>Fuel consumption2</b><input type="text" placeholder="Fuel consumption2..." oninput="this.className = ''" name="fuel_consumption2"></p>
+                    <p><b>CO₂-emissions2</b><input type="text" placeholder="CO₂-emissions2..." oninput="this.className = ''" name="COemissions"></p>
+                    <p><b>Emission class</b><input type="text" placeholder="Emission class..." oninput="this.className = ''" name="emission_class"></p>
                 </div>
 
                 <div class="tab">
@@ -68,10 +70,10 @@
 
                 <div class="tab">
                     <h3 class="mb-5">Colour and Upholstery</h3>
-                    <p><b>Colour</b><input placeholder="Colour..." oninput="this.className = ''" name="colour"></p>
-                    <p><b>Manufacturer colour</b><input placeholder="Manufacturer colour..." oninput="this.className = ''" name="manufacturer_colour"></p>
-                    <p><b>Upholstery colour</b><input placeholder="Upholstery colour..." oninput="this.className = ''" name="upholstery_colour"></p>
-                    <p><b>Upholstery</b><input placeholder="Upholstery..." oninput="this.className = ''" name="upholstery"></p>
+                    <p><b>Colour</b><input type="text" placeholder="Colour..." oninput="this.className = ''" name="colour"></p>
+                    <p><b>Manufacturer colour</b><input type="text" placeholder="Manufacturer colour..." oninput="this.className = ''" name="manufacturer_colour"></p>
+                    <p><b>Upholstery colour</b><input type="text" placeholder="Upholstery colour..." oninput="this.className = ''" name="upholstery_colour"></p>
+                    <p><b>Upholstery</b><input type="text" placeholder="Upholstery..." oninput="this.className = ''" name="upholstery"></p>
                 </div>
 
                 <div class="tab">

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('seller_name')->nullable();
-            $table->string('seller_phone')->nullable();
+            $table->bigInteger('seller_phone')->nullable();
+            $table->string('seller_email')->nullable();
             $table->string('vehicle_name')->nullable();
+            $table->bigInteger('vehicle_price')->nullable();
             $table->string('gearbox')->nullable();
             $table->string('first_registration')->nullable();
             $table->string('power')->nullable();
@@ -33,7 +35,7 @@ return new class extends Migration
             $table->string('empty_weight')->nullable();
             $table->string('fuel_type')->nullable();
             $table->string('fuel_consumption_2')->nullable();
-            $table->string('CO₂-emissions')->nullable();
+            $table->string('COemissions')->nullable();
             $table->string('emission_class')->nullable();
             $table->longText('comfort_convenience')->nullable();
             $table->longText('entertainment_media')->nullable();

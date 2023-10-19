@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::resource('cars', CarController::class);
+    Route::get('/imgDelete/{id?}', [CarController::class, 'imgDelete'])->name('cars.imgDelete');
 
 });
 
