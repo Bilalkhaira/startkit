@@ -1,5 +1,5 @@
 <!--begin:Dashboards menu-->
-<div class="menu-active-bg pt-1 pb-3 px-3 py-lg-6 px-lg-6" data-kt-menu-dismiss="true">
+<div class="menu-active-bg pt-1 pb-3 px-3 py-lg-6 px-lg-6 " data-kt-menu-dismiss="true">
 	<!--begin:Row-->
 	<div class="row">
 		<!--begin:Col-->

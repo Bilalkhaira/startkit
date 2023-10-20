@@ -19,6 +19,11 @@ class CarsDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        if (auth()->user()->getRoleNames()[0] != 'super admin') {
+            $query = Car::query();
+            $query->where('created_by', auth()->user()->id);
+        }
+
         return (new EloquentDataTable($query))
             ->editColumn('user', function (Car $user) {
                 return view('pages.cars.columns._car', compact('user'));

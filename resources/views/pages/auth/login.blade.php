@@ -22,7 +22,7 @@
         <!--begin::Login options-->
         <div class="row g-3 mb-9">
             <!--begin::Col-->
-            <div class="col-md-6">
+            <div class="col-md-6 displayNone">
                 <!--begin::Google link--->
                 <a href="{{ url('/auth/redirect/google') }}?redirect_uri={{ url()->current() }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
                     <img alt="Logo" src="{{ image('svg/brand-logos/google-icon.svg') }}" class="h-15px me-3"/>
@@ -33,7 +33,7 @@
             <!--end::Col-->
 
             <!--begin::Col-->
-            <div class="col-md-6">
+            <div class="col-md-6 displayNone">
                 <!--begin::Google link--->
                 <a href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
                     <img alt="Logo" src="{{ image('svg/brand-logos/apple-black.svg') }}" class="theme-light-show h-15px me-3"/>
@@ -88,7 +88,7 @@
         <!--end::Submit button-->
 
         <!--begin::Sign up-->
-        <div class="text-gray-500 text-center fw-semibold fs-6">
+        <div class="text-gray-500 text-center fw-semibold fs-6 displayNone">
             Not a Member yet?
 
             <a href="{{ route('register') }}" class="link-primary">
