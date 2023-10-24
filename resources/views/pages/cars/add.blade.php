@@ -10,7 +10,7 @@
 
     <div class="card">
         <!--begin::Card body-->
-        <div class="card-body py-4">
+        <div class="card-body cardBody py-4">
             <!--begin::Table-->
             <form id="regForm" action="{{ route('cars.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

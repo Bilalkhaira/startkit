@@ -5,14 +5,16 @@
         <!--begin::Modal content-->
         <div class="modal-content">
             <!--begin::Form-->
-            <form class="form" action="#" id="kt_modal_update_user_form">
+            <form class="form" method="POST" action="{{ route('updateUser') }}" id="kt_modal_update_user_form" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_update_user_header">
                     <!--begin::Modal title-->
                     <h2 class="fw-bold">Update User Details</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
                             <span class="path2"></span>
@@ -66,7 +68,7 @@
                                     <!--begin::Image input-->
                                     <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
                                         <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ $user->profile_photo_url }});"></div>
+                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ asset('images/profile/'.$user->avatar ?? $user->profile_photo_url) }});"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Edit-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -89,7 +91,7 @@
                                         </span>
                                         <!--end::Cancel-->
                                         <!--begin::Remove-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                        <span style="display: none;" class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
                                             <i class="ki-duotone ki-cross fs-2">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
@@ -108,28 +110,10 @@
                                 <label class="fs-6 fw-semibold mb-2">Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="Emma Smith" />
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{ $user->name ?? ''}}" />
                                 <!--end::Input-->
                             </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="fs-6 fw-semibold mb-2">
-                                    <span>Email</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
-                                        <i class="ki-duotone ki-information fs-7">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="smith@kpmg.com" />
-                                <!--end::Input-->
-                            </div>
+                            
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
@@ -137,17 +121,26 @@
                                 <label class="fs-6 fw-semibold mb-2">Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="description" />
+                                <input type="text" class="form-control form-control-solid" placeholder="" value="{{ $user->description ?? ''}}" name="description" />
+                                <!--end::Input-->
+                            </div>
+
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-semibold mb-2">Address</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder="" value="{{ $user->address ?? ''}}" name="address" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="fv-row mb-15">
+                            <div class="fv-row mb-15" style="display: none;">
                                 <!--begin::Label-->
                                 <label class="fs-6 fw-semibold mb-2">Language</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="language" aria-label="Select a Language" data-control="select2" data-placeholder="Select a Language..." class="form-select form-select-solid"
+                                <select aria-label="Select a Language" data-control="select2" data-placeholder="Select a Language..." class="form-select form-select-solid"
                                     data-dropdown-parent="#kt_modal_update_details">
                                     <option></option>
                                     <option value="id">Bahasa Indonesia - Indonesian</option>
@@ -204,7 +197,7 @@
                         <!--end::User form-->
                         <!--begin::Address toggle-->
                         <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">
-                            Address Details
+                            Password Update
                             <span class="ms-2 rotate-180">
                                 <i class="ki-duotone ki-down fs-3"></i>
                             </span>
@@ -215,59 +208,60 @@
                             <!--begin::Input group-->
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <!--begin::Label-->
-                                <label class="fs-6 fw-semibold mb-2">Address Line 1</label>
+                                <label class="fs-6 fw-semibold mb-2">Current Password</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="" name="address1" value="101, Collins Street" />
+                                <input class="form-control form-control-solid" placeholder="" name="current_password" />
+                                <input type="hidden" class="form-control form-control-solid" value="{{ $user->id ?? ''}}" name="updateId" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <!--begin::Label-->
-                                <label class="fs-6 fw-semibold mb-2">Address Line 2</label>
+                                <label class="fs-6 fw-semibold mb-2">New Password</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="" name="address2" />
+                                <input class="form-control form-control-solid" placeholder="" name="password" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <!--begin::Label-->
-                                <label class="fs-6 fw-semibold mb-2">Town</label>
+                                <label class="fs-6 fw-semibold mb-2">Confirm Password</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="" name="city" value="Melbourne" />
+                                <input class="form-control form-control-solid" placeholder="" name="confirmpassword" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row g-9 mb-7">
                                 <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-6 fv-row" style="display: none;">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold mb-2">State / Province</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="" name="state" value="Victoria" />
+                                    <input class="form-control form-control-solid" placeholder="" value="Victoria" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-6 fv-row" style="display: none;">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold mb-2">Post Code</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="" name="postcode" value="3000" />
+                                    <input class="form-control form-control-solid" placeholder="" value="3000" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-7 fv-row">
+                            <div class="d-flex flex-column mb-7 fv-row" style="display: none !important;">
                                 <!--begin::Label-->
                                 <label class="fs-6 fw-semibold mb-2">
                                     <span>Country</span>
@@ -521,7 +515,7 @@
                 <!--begin::Modal footer-->
                 <div class="modal-footer flex-center">
                     <!--begin::Button-->
-                    <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close" data-kt-users-modal-action="cancel">Discard</button>
                     <!--end::Button-->
                     <!--begin::Button-->
                     <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">

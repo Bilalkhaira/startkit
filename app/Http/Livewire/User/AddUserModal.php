@@ -56,6 +56,7 @@ class AddUserModal extends Component
 
     public function submit()
     {
+        dd('save');
         // Validate the form input data
         $this->validate();
 
@@ -119,6 +120,7 @@ class AddUserModal extends Component
 
     public function updateUser($id)
     {
+        dd('update');
         $this->edit_mode = true;
 
         $user = User::find($id);

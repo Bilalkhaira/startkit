@@ -5,12 +5,16 @@
         <div class="menu-content d-flex align-items-center px-3">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
+            @if(!empty(Auth::user()->avatar))
+            <img alt="Logo" src="{{ asset('images/profile/'.Auth::user()->avatar) }}"/>
+            @else
                 @if(Auth::user()->profile_photo_url)
                     <img alt="Logo" src="{{ Auth::user()->profile_photo_url }}"/>
                 @else
                     <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->name) }}">
                         {{ substr(Auth::user()->name, 0, 1) }}
                     </div>
+                @endif
                 @endif
             </div>
             <!--end::Avatar-->
@@ -30,7 +34,7 @@
     <!--end::Menu separator-->
     <!--begin::Menu item-->
     <div class="menu-item px-5">
-        <a href="#" class="menu-link px-5">My Profile</a>
+        <a href="{{ route('user-management.users.show', auth()->user()) }}" class="menu-link px-5">My Profile</a>
     </div>
     <!--end::Menu item-->
     <!--begin::Menu item-->

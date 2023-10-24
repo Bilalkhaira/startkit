@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserProfileController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
@@ -19,6 +21,30 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 |
 */
 
+
+Route::get('/clear', function () {
+    Artisan::call('route:clear');
+    Artisan::call('route:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:cache');
+    Artisan::call('optimize:clear');
+    return 'clear done';
+});
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+    return 'migrated successfully';
+});
+
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return 'migrated successfully';
+});
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
@@ -33,6 +59,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('cars', CarController::class);
     Route::get('/imgDelete/{id?}', [CarController::class, 'imgDelete'])->name('cars.imgDelete');
+
+    Route::post('/update-user', [UserProfileController::class, 'updateUser'])->name('updateUser');
 
 });
 
