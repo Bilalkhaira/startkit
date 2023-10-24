@@ -27,7 +27,7 @@
                 <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <!--begin::Add user-->
-                    <a type="button" class="btn btn-primary bgColor" onmouseover="this.style.backgroundColor='#1D3059!important'" href="{{ route('cars.create') }}">
+                    <a type="button" class="btn btn-primary bgColor" href="{{ route('cars.create') }}">
                         {!! getIcon('plus', 'fs-2', '', 'i') !!}
                         Add Car
                     </a>
