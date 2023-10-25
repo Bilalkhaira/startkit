@@ -26,17 +26,18 @@ class UserController extends Controller
             } else {
 
                 $password = Hash::make($request->password);
-                $generate_token = Str::random(32);
 
-                User::create([
+                $saveUser = User::create([
                     'name' => $request->name ?? '',
                     'phone' => $request->phone ?? '',
                     'zip_code' => $request->zip_code ?? '',
                     'password' => $password ?? '',
-                    'remember_token' => $generate_token ?? '',
                 ]);
 
-                return response()->json('Record register successfully');
+                $success['token'] =  $saveUser->createToken('MyApp')->plainTextToken;
+                $success['name'] =  $saveUser->name;
+
+                return response()->json($success, 'User register successfully.');
             }
         } catch (Exception $e) {
 
@@ -53,7 +54,11 @@ class UserController extends Controller
             } else {
 
                 if (Hash::check($request->password, $user->password)) {
-                    return response()->json(['user' => $user, 'access_token' => $user->remember_token]);
+
+                    $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+                    $success['name'] =  $user->name;
+
+                    return response()->json($success, 'User login successfully.');
                 } else {
                     return response()->json('Your password is not correct.');
                 }
@@ -106,9 +111,9 @@ class UserController extends Controller
         }
 
         $updatePassword = PasswordReset::where([
-                'email' => $request->email,
-                'token' => $request->token
-            ])
+            'email' => $request->email,
+            'token' => $request->token
+        ])
             ->first();
 
         if (!$updatePassword) {
