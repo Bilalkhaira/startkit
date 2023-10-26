@@ -84,12 +84,28 @@
 				</div>
 				<!--end:Menu sub-->
 			</div>
+			<div class="menu-item">
+				<!--begin:Menu link-->
+				<a class="menu-link" href="{{ route('car-request.index') }}">
+					<span class="menu-icon">{!! getIcon('rocket', 'fs-2') !!}</span>
+					<span class="menu-title">Car Request</span>
+				</a>
+				<!--end:Menu link-->
+			</div>
 			@endif
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link" href="{{ route('cars.index') }}">
-					<span class="menu-icon">{!! getIcon('rocket', 'fs-2') !!}</span>
+					<span class="menu-icon">{!! getIcon('car', 'fs-2') !!}</span>
 					<span class="menu-title">Cars</span>
+				</a>
+				<!--end:Menu link-->
+			</div>
+			<div class="menu-item">
+				<!--begin:Menu link-->
+				<a class="menu-link" href="{{ route('blogs.index') }}">
+					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+					<span class="menu-title">Blogs</span>
 				</a>
 				<!--end:Menu link-->
 			</div>

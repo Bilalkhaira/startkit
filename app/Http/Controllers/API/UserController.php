@@ -29,15 +29,16 @@ class UserController extends Controller
 
                 $saveUser = User::create([
                     'name' => $request->name ?? '',
-                    'phone' => $request->phone ?? '',
-                    'zip_code' => $request->zip_code ?? '',
+                    'email' => $request->email ?? '',
+                    // 'phone' => $request->phone ?? '',
+                    // 'zip_code' => $request->zip_code ?? '',
                     'password' => $password ?? '',
                 ]);
 
                 $success['token'] =  $saveUser->createToken('MyApp')->plainTextToken;
                 $success['name'] =  $saveUser->name;
 
-                return response()->json($success, 'User register successfully.');
+                return response()->json($success);
             }
         } catch (Exception $e) {
 
@@ -58,7 +59,7 @@ class UserController extends Controller
                     $success['token'] =  $user->createToken('MyApp')->plainTextToken;
                     $success['name'] =  $user->name;
 
-                    return response()->json($success, 'User login successfully.');
+                    return response()->json($success);
                 } else {
                     return response()->json('Your password is not correct.');
                 }
@@ -126,5 +127,51 @@ class UserController extends Controller
         PasswordReset::where(['email' => $request->email])->delete();
 
         return response()->json('true');
+    }
+
+    public function updateUserProfile(Request $request)
+    {
+        $user = User::find($request->updateId);
+        if (!empty($request->new_password)) {
+            if (!empty($request->old_password && $request->new_password)) {
+                if (Hash::check($request->old_password, $user->password)) {
+                    $newpassword = Hash::make($request->new_password);
+                } else {
+                    return response()->json('Your Current password does not match our records');
+                }
+            } else {
+                return response()->json('Please enter new and old password both');
+            }
+        }
+        $imgpath = public_path('images/profile/');
+        if (empty($request->profileImg)) {
+            $updateimage = $user->profile_photo_path;
+        } else {
+            $imagePath =  $imgpath . $user->profile_photo_path;
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            $destinationPath = $imgpath;
+            $file = $request->profileImg;
+            $fileName = time() . '.' . $file->clientExtension();
+            $file->move($destinationPath, $fileName);
+            $updateimage = $fileName;
+        }
+        try {
+
+            $imageUrl = 'images/profile/' . $updateimage;
+            $imageAsset = asset($imageUrl);
+
+            $user->update([
+                'name' => $request->name ?? '',
+                'phone' => $request->phone ?? '',
+                'zip_code' => $request->zip_code ?? '',
+                'profile_photo_path' => $imageAsset ?? '',
+                'password'      => (!empty($newpassword)) ? $newpassword : $user->password,
+            ]);
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+        }
+        return response()->json($user);
     }
 }

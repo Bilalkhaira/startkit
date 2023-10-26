@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Models\CarRequestModel;
 use Exception;
-use Illuminate\Http\Request;
+use App\Models\CarRequest;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CarRequestController extends Controller
 {
     public function saveCarRequest(Request $request)
     {
         try{
-            // $code = rand(1111,9999);
-            $generate_token = Str::random(32);
+            // $generate_token = Str::random(32);
 
-            CarRequestModel::create([
+            CarRequest::create([
                 'car_name' => $request->car_name ?? '',
                 'rental_type' => $request->rental_type ?? '',
                 'budget' => $request->budget ?? '',
@@ -24,7 +23,7 @@ class CarRequestController extends Controller
                 'email' => $request->email ?? '',
                 'phone' => $request->phone ?? '',
                 'message' => $request->message ?? '',
-                'token' => $generate_token ?? '',
+                // 'token' => $generate_token ?? '',
             ]);
 
             return response()->json('Record insert successfully');

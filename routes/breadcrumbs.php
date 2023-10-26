@@ -39,6 +39,18 @@ Breadcrumbs::for('cars', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Cars', route('dashboard'));
 });
+
+// Home > Dashboard > Cars 
+Breadcrumbs::for('car-request', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Car Request', route('dashboard'));
+});
+
+// Home > Dashboard > Cars 
+Breadcrumbs::for('blogs', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Blog', route('dashboard'));
+});
 // Home > Dashboard > User Management > Roles
 Breadcrumbs::for('user-management.roles.index', function (BreadcrumbTrail $trail) {
     $trail->parent('user-management.index');

@@ -16,11 +16,11 @@ use App\Http\Controllers\API\CarRequestController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/carPost', function (Request $request) {
+// Route::middleware('auth:sanctum')->get('/carPost', function (Request $request) {
     // return $request->user();
-});
+// });
 
-Route::post('/save-car-request', [CarRequestController::class, 'saveCarRequest']);
+
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/signin', [UserController::class, 'signin']);
@@ -28,5 +28,7 @@ Route::post('/signin', [UserController::class, 'signin']);
 Route::post('forget-password', [UserController::class, 'submitForgetPasswordForm']);
 Route::post('reset-password', [UserController::class, 'submitResetPasswordForm']);
 
-// Route::middleware('auth:sanctum')->group( function () {
-// });
+Route::middleware('auth:sanctum')->group( function () {
+    Route::post('update-user-profile', [UserController::class, 'updateUserProfile']);
+    Route::post('/save-car-request', [CarRequestController::class, 'saveCarRequest']);
+});
