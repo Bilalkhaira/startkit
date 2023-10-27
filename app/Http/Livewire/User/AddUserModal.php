@@ -56,7 +56,6 @@ class AddUserModal extends Component
 
     public function submit()
     {
-        dd('save');
         // Validate the form input data
         $this->validate();
 

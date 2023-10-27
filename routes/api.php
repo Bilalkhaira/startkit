@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\CarApiController;
 use App\Http\Controllers\API\CarRequestController;
 
 /*
@@ -17,18 +18,20 @@ use App\Http\Controllers\API\CarRequestController;
 */
 
 // Route::middleware('auth:sanctum')->get('/carPost', function (Request $request) {
-    // return $request->user();
+// return $request->user();
 // });
 
 
 
 Route::post('/register', [UserController::class, 'register']);
-Route::post('/signin', [UserController::class, 'signin']);
+Route::post('/login', [UserController::class, 'login']);
 
 Route::post('forget-password', [UserController::class, 'submitForgetPasswordForm']);
 Route::post('reset-password', [UserController::class, 'submitResetPasswordForm']);
 
-Route::middleware('auth:sanctum')->group( function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('update-user-profile', [UserController::class, 'updateUserProfile']);
     Route::post('/save-car-request', [CarRequestController::class, 'saveCarRequest']);
+    Route::get('/get-all-cars-data', [CarApiController::class, 'index']);
+    Route::get('/get-car-data/{id}', [CarApiController::class, 'show']);
 });

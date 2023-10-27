@@ -14,9 +14,10 @@
 
     <!--begin::Menu item-->
     <div class="menu-item px-3">
-        <a href="{{ route('blogs.edit', $user->id) }}" class="menu-link px-3">
+        <a href="#" class="menu-link px-3" onclick="EditBlog(this)" data-bs-toggle="modal" data-bs-target="#EditModal">
             Edit
         </a>
+        <input type="hidden" value="{{ $user->id ?? ''}}"  id="blogUpdatedId" >
     </div>
     <!--end::Menu item-->
 

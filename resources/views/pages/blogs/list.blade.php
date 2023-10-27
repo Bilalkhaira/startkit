@@ -27,7 +27,7 @@
                 <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <!--begin::Add user-->
-                    <a type="button" class="btn btn-primary bgColor" onclick="AddProduct()">
+                    <a type="button" class="btn btn-primary bgColor" onclick="AddProduct()" data-bs-toggle="modal" data-bs-target="#ProductModal">
                         {!! getIcon('plus', 'fs-2', '', 'i') !!}
                         Add Blog
                     </a>
@@ -54,81 +54,208 @@
         <!--end::Card body-->
     </div>
     <div id="ProductModal" class="modal fade show " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true" aria-hidden="true" style="color: black;">
-    <div class="modal-dialog modal-lg" id="ProductModalDialog">
-        <div class="modal-content" id="ProductModalContent">
+        <div class="modal-dialog modal-lg" id="ProductModalDialog">
+            <div class="modal-content" id="ProductModalContent">
 
-            <form name="productForm" enctype="multipart/form-data" id="prodForm">
-              @csrf
-               <span class='arrow'>
-              <label class='error'></label>
-              </span>
-                  <div class="modal-header">
-                      <h4 class="modal-title" id="ProductModalLabel"></h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  </div>
-                  <div class="modal-body">
-                      <div class="" id="ProductModalData">
+                <form name="productForm" method="POST" action="{{ route('blogs.store') }}" enctype="multipart/form-data" id="prodForm">
+                    @csrf
+                    <span class='arrow'>
+                        <label class='error'></label>
+                    </span>
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="ProductModalLabel">Add Blog</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-kt-users-modal-action="close" data-bs-dismiss="modal" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="" id="ProductModalData">
 
-                        <input type="hidden" id="prod_id" name="prod_id">
+                            <br>
+                            <div class="mb-7">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-semibold mb-2">
+                                    <span>Blog Image</span>
+                                    <span class="ms-1" data-bs-toggle="tooltip" title="Allowed file types: png, jpg, jpeg.">
+                                        <i class="ki-duotone ki-information fs-7">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                        </i>
+                                    </span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Image input wrapper-->
+                                <div class="mt-1">
+                                    <!--begin::Image placeholder-->
+                                    <style>
+                                        .image-input-placeholder {
+                                            background-image: url('{{ image(' svg/files/blank-image.svg') }}');
+                                        }
+
+                                        [data-bs-theme="dark"] .image-input-placeholder {
+                                            background-image: url('{{ image(' svg/files/blank-image-dark.svg') }}');
+                                        }
+                                    </style>
+                                    <!--end::Image placeholder-->
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Edit-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                            <i class="ki-duotone ki-pencil fs-7">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                            <!--end::Inputs-->
+                                        </label>
+
+                                    </div>
+                                    <!--end::Image input-->
+                                </div>
+                                <!--end::Image input wrapper-->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 mb-5">
+                                    <label> Title:</label>
+                                    <input type="text" name="title" class="form-control" placeholder="Enter Title">
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <label> Description:</label>
+                                    <textarea class="form-control" name="description" rows="5" placeholder="Enter Description"></textarea>
+                                </div>
+                            </div>
 
 
-
-                        <div class="row">
-                         
-                          <div class="col-lg-6">
-                            <label> Name:</label>
-                            <input type="text" id="prod_name" name="prod_name" class="form-control" placeholder="Enter Product Name"></div>
-                          
                         </div>
-                        <br>
-                        <div class="row">
-
-                          <div class="col-lg-6">
-                            <label> Price: </label>
-                            <input type="number" id="prod_actual_price" name="prod_actual_price" class="form-control" placeholder="Enter Actual Price"></div>
-                              <div class="col-lg-6">
-                            <label> Price:</label>
-                            <input type="number" id="prod_sale_price" name="prod_sale_price" class="form-control" placeholder="Enter Sale Price" ></div>
-                        </div>
-                        <br>
-
-                        
-                        <br>
-                        <div class="row">
-                          <div class="col-lg-12">
-                                <label> Images:</label></br>
-                                <input name="product_image[]" id="fuUpload1" type="file" multiple="multiple" />
-                                <div id="dvPreview" style="margin-bottom: 10px"></div>
-                                
-                            
-                          </div>
-                           <div class="col-lg-12">
-                                <div class="row" id="img_append"></div>
-                          </div>
-                          <div class="col-lg-12">
-                            <label> Description:</label>
-                            <textarea class="form-control" name="prod_descrip" id="prod_descrip" rows="5" placeholder="Enter Product Description"></textarea></div>
-                            <input name="old_images" id="old_images" type="hidden">
-                        </div>
 
 
-                      </div>
+                    </div>
+                    <div class="modal-footer" id="ProductModalFooter">
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close" data-kt-users-modal-action="cancel">Discard</button>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+
+                    </div>
+                </form>
 
 
-                      </div>
-                  <div class="modal-footer" id="ProductModalFooter">
-                      <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-info ">Save</button>
-
-                  </div>
-            </form>
-
-
+            </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-</div>
+    <div id="EditModal" class="modal fade show " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true" aria-hidden="true" style="color: black;">
+        <div class="modal-dialog modal-lg" id="ProductModalDialog">
+            <div class="modal-content" id="ProductModalContent">
+
+                <form name="productForm" method="POST" action="{{ route('blogUpdate') }}" enctype="multipart/form-data" id="prodForm">
+                    @csrf
+                    <span class='arrow'>
+                        <label class='error'></label>
+                    </span>
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="ProductModalLabel">Edit Blog</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-kt-users-modal-action="close" data-bs-dismiss="modal" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="" id="ProductModalData">
+
+                            <br>
+                            <div class="mb-7">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-semibold mb-2">
+                                    <span>Blog Image</span>
+                                    <span class="ms-1" data-bs-toggle="tooltip" title="Allowed file types: png, jpg, jpeg.">
+                                        <i class="ki-duotone ki-information fs-7">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                        </i>
+                                    </span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Image input wrapper-->
+                                <div class="mt-1">
+                                    <!--begin::Image placeholder-->
+                                    <style>
+                                        .image-input-placeholder {
+                                            background-image: url('{{ image(' svg/files/blank-image.svg') }}');
+                                        }
+
+                                        [data-bs-theme="dark"] .image-input-placeholder {
+                                            background-image: url('{{ image(' svg/files/blank-image-dark.svg') }}');
+                                        }
+                                    </style>
+                                    <!--end::Image placeholder-->
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px" id="blogImg"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Edit-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                            <i class="ki-duotone ki-pencil fs-7">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                            <!--end::Inputs-->
+                                        </label>
+
+                                    </div>
+                                    <!--end::Image input-->
+                                </div>
+                                <!--end::Image input wrapper-->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 mb-5">
+                                    <label> Title:</label>
+                                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
+                                    <input type="hidden" id="updateId" name="updateId">
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <label> Description:</label>
+                                    <textarea class="form-control" id="description" name="description" rows="5" placeholder="Enter Description"></textarea>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer" id="ProductModalFooter">
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close" data-kt-users-modal-action="cancel">Discard</button>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+
+                    </div>
+                </form>
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 
     @push('scripts')
     {{ $dataTable->scripts() }}
@@ -147,41 +274,33 @@
 
 
         function AddProduct() {
-            alert('oo');
             $('#ProductModal').modal('show');
-            // document.getElementById('prod_name').value = "";
-            // document.getElementById('prod_actual_price').value = "";
-            // document.getElementById('prod_sale_price').value = "";
-            // document.getElementById('prod_stock').value = "";
-            // document.getElementById('prod_descrip').value = "";
-            // document.getElementById('prod_id').value = "";
-            // document.getElementById("fuUpload1").value = "";
-            // $("#dvPreview").html('');
-            // $("#img_append").html('');
-            // $('#old_images').val('');
-            
-            // $('#ProductModalLabel').html('Add New Product');
+        }
 
-            // document.getElementById('ProductModal').style.backgroundColor = "rgba(0,0,0,0.8)";
-            // document.getElementById('ProductModalDialog').style.paddingTop = "0px";
-            // document.getElementById('ProductModalData').style.padding = "20px 20px 0px 20px";
+        function EditBlog(anchor) {
+            var blogId = anchor.parentElement.querySelector("#blogUpdatedId").value;
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
 
+            $.ajax({
+                url: "/blogs/" + blogId + "/edit",
+                type: "GET",
+                dataType: "json",
 
-            // cate_id = "0"
+                success: function(data) {
+                    $('#EditModal').modal('show');
+                    $('body').find('#title').val(data.title);
+                    $('body').find('#description').val(data.description);
+                    $('body').find('#updateId').val(data.id);
 
-            // $.ajax({
-            //     type: "GET",
-            //     cache: false,
-            //     url: "{{ config('app.url')}}/admin/get-category-name-list/" + cate_id,
-            //     success: function(data) {
-
-            //         $('#prod_cate').html(data);
-            //     },
-            //     error: function(jqXHR, textStatus, errorThrown) {
-            //         alert('Exception:' + errorThrown);
-            //     }
-            // });
-
+                    var path = "{{ asset('images/blog/') }}"+"/"+data.img;
+                    var element = document.getElementById("blogImg");
+                    element.style.backgroundImage = "url("+ path + ")";
+                }
+            });
         }
     </script>
     @endpush

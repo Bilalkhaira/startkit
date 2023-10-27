@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\DataTables\BlogsDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class BlogController extends Controller
 {
@@ -36,31 +37,29 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         try {
-            $newRecord = Car::create([
-                'created_by' => auth()->user()->id ?? '',
-                'seller_name' => $request->seller_name ?? '',
-            ]);
 
-
-            if (!empty($request->images[0])) {
-                foreach ($request->images as $image) {
-
-                    $imgpath = public_path('images/');
-
-                    $imageName = $image->getClientOriginalName();
-                    $image->move($imgpath, $imageName);
-
-                    CarImages::create([
-                        'car_id' => $newRecord->id ?? '',
-                        'images' => $imageName ?? ''
-                    ]);
-                }
+            $imgpath = public_path('images/blog/');
+            if (!empty($request->avatar)) {
+                $file = $request->avatar;
+                $fileName = time() . '.' . $file->clientExtension();
+                $file->move($imgpath, $fileName);
             }
+
+            // $imageUrl = 'images/blog/' . $fileName;
+            // $imageAsset = asset($imageUrl);
+
+            Blog::create([
+                'created_by' => auth()->user()->id ?? '',
+                'title' => $request->title ?? '',
+                'description' => $request->description ?? '',
+                'img' => $fileName ?? '',
+            ]);
 
             toastr()->success('Created Successfully');
 
-            return redirect()->route('cars.index');
+            return redirect()->route('blogs.index');
         } catch (Exception $e) {
             toastr()->error($e);
 
@@ -74,8 +73,8 @@ class BlogController extends Controller
     public function show($id)
     {
         try {
-            $car = Car::with('images')->where('id', $id)->first();
-            return view('pages.blogs.show', compact('car'));
+            $blog = Blog::find($id);
+            return view('pages.blogs.show', compact('blog'));
         } catch (Exception $e) {
             toastr()->error($e);
 
@@ -89,9 +88,10 @@ class BlogController extends Controller
     public function edit($id)
     {
         try {
-            $car = Car::with('images')->where('id', $id)->first();
+            $blog = Blog::find($id);
 
-            return view('pages.blogs.edit', compact('car'));
+            return response()->json($blog);
+
        } catch (Exception $e) {
             toastr()->error($e);
 
@@ -102,41 +102,42 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function blogUpdate(Request $request)
     {
         try {
-            $updateRecord = Blog::find($request->updateId);
-
-            $updateRecord->update([
-                'seller_name' => $request->seller_name ?? '',
-                'seller_phone' => $request->seller_phone ?? '',
-                'seller_address' => $request->seller_address ?? '',
-            ]);
-
-
-            if (!empty($request->images[0])) {
-                foreach ($request->images as $image) {
-
-                    $imgpath = public_path('images/');
-
-                    $imageName = $image->getClientOriginalName();
-                    $image->move($imgpath, $imageName);
-
-                    CarImages::create([
-                        'car_id' => $request->updateId ?? '',
-                        'images' => $imageName ?? ''
-                    ]);
+            $updatedRow = Blog::find($request->updateId);
+            $imgpath = public_path('images/blog/');
+            if (empty($request->avatar)) {
+                $updateimage = $updatedRow->img;
+            } else {
+                $imagePath =  $imgpath . $updatedRow->img;
+                
+                if (File::exists($imagePath)) {
+                    File::delete($imagePath);
                 }
+                $destinationPath = $imgpath;
+                $file = $request->avatar;
+                $fileName = time() . '.' . $file->clientExtension();
+                $file->move($destinationPath, $fileName);
+                $updateimage = $fileName;
+    
+                // $imageUrl = 'images/blog/' . $updateimage;
+                // $updateimage = asset($imageUrl);
             }
 
-            toastr()->success('Record Updated Successfully');
+           
 
-            return redirect()->route('cars.index');
-       } catch (Exception $e) {
-            toastr()->error($e);
-
-            return redirect()->back();
+            $updatedRow->update([
+                'title' => $request->title ?? '',
+                'description' => $request->description ?? '',
+                'img' => $updateimage ?? '',
+            ]);
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
         }
+        toastr()->success('Update Successfully');
+
+        return redirect()->route('blogs.index');
     }
 
     /**
@@ -145,7 +146,7 @@ class BlogController extends Controller
     public function destroy($id)
     {
         try {
-            $imgpath = public_path('images/blogs/');
+            $imgpath = public_path('images/blog/');
             $imgRecord = Blog::find($id);
             $path = $imgpath . $imgRecord->img;
 

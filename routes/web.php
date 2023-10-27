@@ -62,6 +62,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('cars', CarController::class);
     Route::resource('car-request', CarRequestsController::class);
     Route::resource('blogs', BlogController::class);
+    Route::post('/blog-update', [BlogController::class, 'blogUpdate'])->name('blogUpdate');
     Route::get('/imgDelete/{id?}', [CarController::class, 'imgDelete'])->name('cars.imgDelete');
 
     Route::post('/update-user', [UserProfileController::class, 'updateUser'])->name('updateUser');

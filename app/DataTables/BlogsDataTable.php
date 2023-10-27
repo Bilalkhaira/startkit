@@ -68,7 +68,7 @@ class BlogsDataTable extends DataTable
         return [
             Column::make('id')->title('ID'),
             Column::make('title')->title('Title'),
-            Column::make('img')->title('Image'),
+            // Column::make('img')->title('Image'),
             // Column::make('description')->title('Description'),
             Column::computed('action')
                 ->addClass('text-end text-nowrap')
