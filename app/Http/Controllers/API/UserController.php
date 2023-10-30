@@ -30,9 +30,10 @@ class UserController extends Controller
                 $saveUser = User::create([
                     'name' => $request->name ?? '',
                     'email' => $request->email ?? '',
-                    'phone' => $request->phone ?? '',
+                    'phone_no' => $request->phone_no ?? '',
                     'zip_code' => $request->zip_code ?? '',
                     'password' => $password ?? '',
+                    'app_user' => 1,
                 ]);
 
                 $success['token'] =  $saveUser->createToken('MyApp')->plainTextToken;
@@ -84,13 +85,13 @@ class UserController extends Controller
                 PasswordReset::create([
                     'email' => $request->email,
                     'token' => $token,
-                    'created_at' => Carbon::now()
+                    // 'created_at' => Carbon::now()
                 ]);
 
-                Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
-                    $message->to($request->email);
-                    $message->subject('Reset Password');
-                });
+                // Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
+                //     $message->to($request->email);
+                //     $message->subject('Reset Password');
+                // });
 
                 return response()->json($token);
             }

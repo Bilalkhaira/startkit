@@ -14,6 +14,9 @@ return new class extends Migration {
             $table->string('profile_photo_path', 2048)->nullable()->after('email');
             $table->mediumText('address')->nullable();
             $table->mediumText('description')->nullable();
+            $table->mediumInteger('zip_code')->nullable();
+            $table->mediumInteger('phone_no')->nullable();
+            $table->tinyInteger('app_user')->define(0);
         });
     }
 
