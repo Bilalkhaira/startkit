@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CarApiController;
+use App\Http\Controllers\API\BlogApiController;
 use App\Http\Controllers\API\CarRequestController;
 
 /*
@@ -34,4 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/save-car-request', [CarRequestController::class, 'saveCarRequest']);
     Route::get('/get-all-cars-data', [CarApiController::class, 'index']);
     Route::get('/get-car-data/{id}', [CarApiController::class, 'show']);
+
+    Route::get('/get-all-blogs-data', [BlogApiController::class, 'index']);
+    Route::get('/get-blog-data/{id}', [BlogApiController::class, 'show']);
 });

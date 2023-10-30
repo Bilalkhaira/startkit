@@ -27,6 +27,18 @@ class CarsRequestDataTable extends DataTable
             ->addColumn('action', function (CarRequest $user) {
                 return view('pages.carRequest.columns._actions', compact('user'));
             })
+            ->addColumn('car_name', function (CarRequest $user) {
+                return (json_decode($user->data, true))['car_name'];
+            })
+            ->addColumn('rental_type', function (CarRequest $user) {
+                return (json_decode($user->data, true))['rental_type'];
+            })
+            ->addColumn('budget', function (CarRequest $user) {
+                return (json_decode($user->data, true))['budget'];
+            })
+            ->addColumn('phone', function (CarRequest $user) {
+                return (json_decode($user->data, true))['phone'];
+            })
             ->setRowId('id');
     }
 
@@ -45,7 +57,7 @@ class CarsRequestDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('car_requests-table')
+            ->setTableId('notifications-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>",)
