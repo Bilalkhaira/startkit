@@ -19,7 +19,6 @@ class CarsRequestDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-
         return (new EloquentDataTable($query))
             ->editColumn('user', function (CarRequest $user) {
                 return view('pages.carRequest.columns._car', compact('user'));

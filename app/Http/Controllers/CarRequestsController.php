@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use File;
 use Exception;
+use App\Models\User;
 use App\Models\CarRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,8 @@ class CarRequestsController extends Controller
      */
     public function index(CarsRequestDataTable $dataTable)
     {
+        $user = $user = User::role('super admin')->first();
+        $user->unreadNotifications->markAsRead();
         return $dataTable->render('pages.carRequest.list');
     }
 
@@ -41,7 +44,10 @@ class CarRequestsController extends Controller
     public function show($id)
     {
         try {
-            $carRequest = CarRequest::find($id);
+            $user = $user = User::role('super admin')->first();
+            $user->unreadNotifications->where('id',$id)->markAsRead();
+            $carRequest = CarRequest::find((int)$id);
+
             return view('pages.carRequest.show', compact('carRequest'));
 
         } catch (Exception $e) {
@@ -74,7 +80,7 @@ class CarRequestsController extends Controller
     {
         try {
 
-            $car = CarRequest::findOrFail($id);
+            $car = CarRequest::findOrFail((int)$id);
 
             $car->delete();
 

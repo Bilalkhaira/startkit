@@ -29,17 +29,17 @@ class CarRequestController extends Controller
             $insertUser = $user->notify(new \App\Notifications\AdminNotification($details));
 
             // $generate_token = Str::random(32);
-            $token = Notification::latest('created_at')->first();
-            CarRequest::create([
-                'car_name' => $request->car_name ?? '',
-                'rental_type' => $request->rental_type ?? '',
-                'budget' => $request->budget ?? '',
-                'name' => $request->name ?? '',
-                'email' => $request->email ?? '',
-                'phone' => $request->phone ?? '',
-                'message' => $request->message ?? '',
-                'token' => $token->id ?? '',
-            ]);
+            // $token = Notification::latest('created_at')->first();
+            // CarRequest::create([
+            //     'car_name' => $request->car_name ?? '',
+            //     'rental_type' => $request->rental_type ?? '',
+            //     'budget' => $request->budget ?? '',
+            //     'name' => $request->name ?? '',
+            //     'email' => $request->email ?? '',
+            //     'phone' => $request->phone ?? '',
+            //     'message' => $request->message ?? '',
+            //     'token' => $token->id ?? '',
+            // ]);
 
             return response()->json('Record insert successfully');
         } catch (Exception $e) {

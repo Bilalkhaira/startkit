@@ -30,8 +30,8 @@ class UserController extends Controller
                 $saveUser = User::create([
                     'name' => $request->name ?? '',
                     'email' => $request->email ?? '',
-                    // 'phone' => $request->phone ?? '',
-                    // 'zip_code' => $request->zip_code ?? '',
+                    'phone' => $request->phone ?? '',
+                    'zip_code' => $request->zip_code ?? '',
                     'password' => $password ?? '',
                 ]);
 
@@ -48,7 +48,6 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        // dd('ooo');
         try {
             $user = User::where('email', $request->email)->first();
             if (empty($user)) {

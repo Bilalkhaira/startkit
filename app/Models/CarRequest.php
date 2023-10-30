@@ -12,4 +12,5 @@ class CarRequest extends Model
     protected $guarded = [];
 
     protected $table = 'notifications';
+    
 }
