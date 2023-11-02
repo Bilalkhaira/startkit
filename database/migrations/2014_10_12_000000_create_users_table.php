@@ -21,6 +21,12 @@ return new class extends Migration
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->rememberToken();
+            $table->mediumText('address')->nullable();
+            $table->mediumText('description')->nullable();
+            $table->mediumInteger('zip_code')->nullable();
+            $table->mediumInteger('phone_no')->nullable();
+            $table->tinyInteger('app_user')->define(0);
+            $table->string('_token')->nullable();
             $table->timestamps();
         });
     }

@@ -12,4 +12,6 @@ class PasswordReset extends Model
     protected $guarded = [];
 
     protected $table = 'password_resets';
+
+    public $timestamps = false;
 }

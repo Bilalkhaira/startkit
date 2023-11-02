@@ -33,6 +33,7 @@ class User extends Authenticatable
         'phone_no',
         'zip_code',
         'app_user',
+        '_token',
     ];
 
     /**

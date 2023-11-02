@@ -18,13 +18,13 @@ class CarRequestController extends Controller
 
             $user = User::role('super admin')->first();
             $details = [
-                'car_name' => 'car_name' ?? '',
-                'rental_type' => 'rental_type' ?? '',
-                'budget' => 'budget' ?? '',
-                'name' => 'name' ?? '',
-                'email' => 'email'  ?? '',
-                'phone' => 'phone' ?? '',
-                'message' => 'message' ?? '',
+                'car_name' => $request->car_name ?? '',
+                'rental_type' => $request->rental_type ?? '',
+                'budget' => $request->budget ?? '',
+                'name' => $request->name ?? '',
+                'email' => $request->email ?? '',
+                'phone' => $request->phone ?? '',
+                'message' => $request->message ?? '',
             ];
             $insertUser = $user->notify(new \App\Notifications\AdminNotification($details));
 

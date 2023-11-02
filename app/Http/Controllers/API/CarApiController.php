@@ -13,8 +13,11 @@ class CarApiController extends Controller
     {
         try{
 
-           $cars = Car::all();
-
+           $cars = Car::with('images')->get();
+           foreach($cars as $key => $path)
+           {
+            $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
+           }
             return response()->json($cars);
 
         }catch (Exception $e){
@@ -27,7 +30,10 @@ class CarApiController extends Controller
     {
         try{
 
-           $car = Car::find($id);
+           $car = Car::with('images')->where('id', $id)->first();
+
+
+           $car['image_path'] = 'https://001cars.mradevelopers.com/images/';
 
             return response()->json($car);
 

@@ -17,7 +17,8 @@ class BlogApiController extends Controller
            $blogs = Blog::all();
            foreach($blogs as $blog)
            {
-            $blog['img'] = public_path('images/blog/').$blog->img;
+            // $blog['img'] = public_path('images/blog/').$blog->img;
+            $blog['img'] = 'https://001cars.mradevelopers.com/images/blog/'.$blog->img;
            }
 
             return response()->json($blogs);
@@ -33,7 +34,7 @@ class BlogApiController extends Controller
         try{
 
            $blog = Blog::find($id);
-           $blog['img'] = public_path('images/blog/').$blog->img;
+           $blog['img'] = 'https://001cars.mradevelopers.com/images/blog/'.$blog->img;
             return response()->json($blog);
 
         }catch (Exception $e){

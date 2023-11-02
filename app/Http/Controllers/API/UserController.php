@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Mail;
+use File;
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
@@ -59,11 +60,36 @@ class UserController extends Controller
 
                     $success['token'] =  $user->createToken('MyApp')->plainTextToken;
                     $success['name'] =  $user->name;
+                    $success['id'] =  $user->id;
+                    $success['email'] =  $user->email;
+                    $success['profile_photo_path'] =  $user->profile_photo_path;
+
+                    $user->update(['_token' => $success['token']]);
 
                     return response()->json($success);
                 } else {
                     return response()->json('Your password is not correct.');
                 }
+            }
+        } catch (Exception $e) {
+
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function validateToken($token = null, $uid = null)
+    {
+        try {
+            $user = User::where('id', $uid)->where('_token', $token)->first();
+            if (empty($user)) {
+                $success['status'] =  401;
+                $success['message'] =  'Unauthorized';
+                return response()->json($success);
+            } else {
+                $success['status'] =  200;
+                $success['message'] =  'Authenticated';
+                return response()->json($success);
+                
             }
         } catch (Exception $e) {
 
@@ -85,7 +111,7 @@ class UserController extends Controller
                 PasswordReset::create([
                     'email' => $request->email,
                     'token' => $token,
-                    // 'created_at' => Carbon::now()
+                    'created_at' => Carbon::now()
                 ]);
 
                 // Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
@@ -108,7 +134,7 @@ class UserController extends Controller
             return response()->json('This user is not exit please registor');
         }
 
-        if ($request->password == $request->password_confirmation) {
+        if ($request->password != $request->password_confirmation) {
             return response()->json('Password and confirm password are not same');
         }
 
@@ -160,8 +186,8 @@ class UserController extends Controller
         }
         try {
 
-            $imageUrl = 'images/profile/' . $updateimage;
-            $imageAsset = asset($imageUrl);
+            $imageAsset = 'https://001cars.mradevelopers.com/images/profile/' . $updateimage;
+            // $imageAsset = asset($imageAsset);
 
             $user->update([
                 'name' => $request->name ?? '',
@@ -170,9 +196,24 @@ class UserController extends Controller
                 'profile_photo_path' => $imageAsset ?? '',
                 'password'      => (!empty($newpassword)) ? $newpassword : $user->password,
             ]);
+            return response()->json($user);
         } catch (Exception $e) {
             toastr()->error($e->getMessage());
         }
-        return response()->json($user);
+        
+    }
+
+    public function getUser($id)
+    {
+        try{
+
+           $user = User::find($id);
+
+            return response()->json($user);
+
+        }catch (Exception $e){
+
+            return response()->json($e);
+        }
     }
 }

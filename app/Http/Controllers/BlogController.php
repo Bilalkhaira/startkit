@@ -22,6 +22,7 @@ class BlogController extends Controller
      */
     public function index(BlogsDataTable $dataTable)
     {
+        
         return $dataTable->render('pages.blogs.list');
     }
 
