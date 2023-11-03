@@ -31,23 +31,87 @@
                     <h3 class="mb-5">Vehicle Basic Data</h3>
                     <p><b> Name</b><input type="text" placeholder="Vehicle Name..." oninput="this.className = ''" name="vehicle_name" value="{{ $car->vehicle_name ?? ''}}"></p>
                     <p><b> Price</b><input type="number" placeholder="Vehicle Price..." oninput="this.className = ''" name="vehicle_price" value="{{ $car->vehicle_price ?? ''}}"></p>
-                    <p><b>Body type</b><input type="text" placeholder="Body type..." oninput="this.className = ''" name="body_type" value="{{ $car->body_type ?? ''}}"></p>
-                    <p><b>Type</b><input type="text" placeholder="Type..." oninput="this.className = ''" name="type" value="{{ $car->type ?? ''}}"></p>
+                    <p><b>Body type</b>
+                    <select name="body_type" id="">
+                        <option @if(isset($car->body_type) && $car->body_type == 'Compact') ? selected  @endif value="Compact">Compact</option>
+                        <option @if(isset($car->body_type) && $car->body_type == 'Convertible') ? selected  @endif value="Convertible">Convertible</option>
+                        <option @if(isset($car->body_type) && $car->body_type == 'Coup') ? selected  @endif value="Coup">Coup</option>
+                        <option @if(isset($car->body_type) && $car->body_type == 'SUV/ Off-road') ? selected  @endif value="SUV/ Off-road">SUV/ Off-road</option>
+                        <option @if(isset($car->body_type) && $car->body_type == 'Station Wagon') ? selected  @endif value="Station Wagon">Station Wagon</option>
+                        <option @if(isset($car->body_type) && $car->body_type == 'Sedan') ? selected  @endif value="Sedan">Sedan</option>
+                        <option @if(isset($car->body_type) && $car->body_type == 'Van') ? selected  @endif value="Van">Van</option>
+                        <option @if(isset($car->body_type) && $car->body_type == 'Others') ? selected  @endif value="Others">Others</option>
+                    </select>
+                </p>
+                    <p><b>Vehicle Type</b>
+                    <select name="type" id="">
+                        <option @if(isset($car->type) && $car->type == 'Used') ? selected  @endif value="Used">Used</option>
+                        <option @if(isset($car->type) && $car->type == 'New') ? selected  @endif value="New">New</option>
+                        <option @if(isset($car->type) && $car->type == 'Classic') ? selected  @endif value="Classic">Classic</option>
+                        <option @if(isset($car->type) && $car->type == 'Antique') ? selected  @endif value="Antique">Antique</option>
+                    </select>
+                </p>
                     <p><b>Drivetrain</b><input type="text" placeholder="Drivetrain..." oninput="this.className = ''" name="drivetrain" value="{{ $car->drivetrain ?? ''}}"></p>
-                    <p><b>Seats</b><input type="number" placeholder="Seats..." oninput="this.className = ''" name="seats" value="{{ $car->seats ?? ''}}"></p>
-                    <p><b>Doors</b><input type="number" placeholder="Doors..." oninput="this.className = ''" name="doors" value="{{ $car->doors ?? ''}}"></p>
+                    <p><b>Seats</b>
+                    <select name="seats" id="">
+                        <option @if(isset($car->seats) && $car->seats == '2') ? selected  @endif value="2">2</option>
+                        <option @if(isset($car->seats) && $car->seats == '3') ? selected  @endif value="3">3</option>
+                        <option @if(isset($car->seats) && $car->seats == '4') ? selected  @endif value="4">4</option>
+                        <option @if(isset($car->seats) && $car->seats == '5') ? selected  @endif value="5">5</option>
+                        <option @if(isset($car->seats) && $car->seats == '6') ? selected  @endif value="6">6</option>
+                        <option @if(isset($car->seats) && $car->seats == '7') ? selected  @endif value="7">7</option>
+                        <option @if(isset($car->seats) && $car->seats == '8') ? selected  @endif value="8">8</option>
+                        <option @if(isset($car->seats) && $car->seats == '9') ? selected  @endif value="9">9</option>
+                        <option @if(isset($car->seats) && $car->seats == '10') ? selected  @endif value="10">10</option>
+                    </select>
+                </p>
+                    <p><b>Doors</b>
+                    <select name="doors" id="">
+                        <option @if(isset($car->doors) && $car->doors == '1') ? selected  @endif value="1">1</option>
+                        <option @if(isset($car->doors) && $car->doors == '2') ? selected  @endif value="2">2</option>
+                        <option @if(isset($car->doors) && $car->doors == '3') ? selected  @endif value="3">3</option>
+                        <option @if(isset($car->doors) && $car->doors == '4') ? selected  @endif value="4">4</option>
+                        <option @if(isset($car->doors) && $car->doors == '5') ? selected  @endif value="5">5</option>
+                        <option @if(isset($car->doors) && $car->doors == '6') ? selected  @endif value="6">6</option>
+                        <option @if(isset($car->doors) && $car->doors == '7') ? selected  @endif value="7">7</option>
+                        <option @if(isset($car->doors) && $car->doors == '8') ? selected  @endif value="8">8</option>
+                    </select>
+                </p>
                     <p><b>Offer number</b><input type="text" placeholder="Offer number..." oninput="this.className = ''" name="offer_number" value="{{ $car->offer_number ?? ''}}"></p>
-                    <p><b>Warranty</b><input type="text" placeholder="Warranty..." oninput="this.className = ''" name="warranty" value="{{ $car->warranty ?? ''}}"></p>
+                    <p><b>Warranty</b>
+                    <select name="warranty" id="">
+                        <option @if(isset($car->warranty) && $car->warranty == 'Yes') ? selected  @endif value="Yes">Yes</option>
+                        <option @if(isset($car->warranty) && $car->warranty == 'No') ? selected  @endif value="No">No</option>
+                    </select>
+                </p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle History</h3>
                     <p><b>Mileage</b><input placeholder="Mileage" type="text" oninput="this.className = ''" name="mileage" value="{{ $car->mileage ?? ''}}"></p>
                     <p><b>First registration</b><input placeholder="First registration" type="date" oninput="this.className = ''" name="first_registration" value="{{ $car->first_registration ?? ''}}"></p>
+                    <p><b>Full service history</b>
+                    <select name="service_history" id="">
+                        <option @if(isset($car->service_history) && $car->service_history == 'Yes') ? selected  @endif value="Yes">Yes</option>
+                        <option @if(isset($car->service_history) && $car->service_history == 'No') ? selected  @endif value="No">No</option>
+                    </select>
+                </p>
+                <p><b>Non-smoker vehicle</b>
+                    <select name="non_smoker" id="">
+                        <option @if(isset($car->non_smoker) && $car->non_smoker == 'Yes') ? selected  @endif value="Yes">Yes</option>
+                        <option @if(isset($car->non_smoker) && $car->non_smoker == 'No') ? selected  @endif value="No">No</option>
+                    </select>
+                </p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Technical Data</h3>
                     <p><b>Power</b><input type="text" placeholder="Power..." oninput="this.className = ''" name="power" value="{{ $car->power ?? ''}}"></p>
-                    <p><b>Gearbox</b><input placeholder="Gearbox..." oninput="this.className = ''" name="gearbox" value="{{ $car->gearbox ?? ''}}"></p>
+                    <p><b>Gearbox</b>
+                    <select name="gearbox" id="">
+                        <option @if(isset($car->gearbox) && $car->gearbox == 'Automatic') ? selected  @endif value="Automatic">Automatic</option>
+                        <option @if(isset($car->gearbox) && $car->gearbox == 'Semi Auto') ? selected  @endif value="Semi Auto">Semi Auto</option>
+                        <option @if(isset($car->gearbox) && $car->gearbox == 'Manual') ? selected  @endif value="Manual">Manual</option>
+                    </select>
+                </p>
                     <p><b>Engine size</b><input type="text" placeholder="Engine size..." oninput="this.className = ''" name="engine_size" value="{{ $car->engine_size ?? ''}}"></p>
                     <p><b>Gears</b><input type="number" placeholder="Gears..." oninput="this.className = ''" name="gears" value="{{ $car->gears ?? ''}}"></p>
                     <p><b>Cylinders</b><input type="number" placeholder="Cylinders..." oninput="this.className = ''" name="cylinders" value="{{ $car->cylinders ?? ''}}"></p>
@@ -55,7 +119,14 @@
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Energy Consumption</h3>
-                    <p><b>Fuel type</b><input type="text" placeholder="Fuel type..." oninput="this.className = ''" name="fuel_type" value="{{ $car->fuel_type ?? ''}}"></p>
+                    <p><b>Fuel type</b>
+                    <select name="fuel_type" id="">
+                        <option @if(isset($car->fuel_type) && $car->fuel_type == 'Diesel') ? selected  @endif value="Diesel">Diesel</option>
+                        <option @if(isset($car->fuel_type) && $car->fuel_type == 'Gasoline') ? selected  @endif value="Gasoline">Gasoline</option>
+                        <option @if(isset($car->fuel_type) && $car->fuel_type == 'Electric') ? selected  @endif value="Electric">Electric</option>
+                        <option @if(isset($car->fuel_type) && $car->fuel_type == 'Hybrid') ? selected  @endif value="Hybrid">Hybrid</option>
+                    </select>
+                </p>
                     <p><b>Fuel consumption2</b><input type="text" placeholder="Fuel consumption2..." oninput="this.className = ''" name="fuel_consumption2" value="{{ $car->fuel_consumption_2 ?? ''}}"></p>
                     <p><b>CO₂-emissions2</b><input type="text" placeholder="CO₂-emissions2..." oninput="this.className = ''" name="COemissions" value="{{ $car->COemissions ?? ''}}"></p>
                     <p><b>Emission class</b><input type="text" placeholder="Emission class..." oninput="this.className = ''" name="emission_class" value="{{ $car->emission_class ?? ''}}"></p>

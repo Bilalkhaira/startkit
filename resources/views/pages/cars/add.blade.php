@@ -29,23 +29,87 @@
                     <h3 class="mb-5">Vehicle Basic Data</h3>
                     <p><b> Name</b><input type="text" placeholder="Vehicle Name..." oninput="this.className = ''" name="vehicle_name"></p>
                     <p><b> Price</b><input type="number" placeholder="Vehicle Price..." oninput="this.className = ''" name="vehicle_price"></p>
-                    <p><b>Body type</b><input type="text" placeholder="Body type..." oninput="this.className = ''" name="body_type"></p>
-                    <p><b>Type</b><input type="text" placeholder="Type..." oninput="this.className = ''" name="type"></p>
+                    <p><b>Body type</b>
+                    <select name="body_type" id="">
+                        <option value="Compact">Compact</option>
+                        <option value="Convertible">Convertible</option>
+                        <option value="Coup">Coup</option>
+                        <option value="SUV/ Off-road">SUV/ Off-road</option>
+                        <option value="Station Wagon">Station Wagon</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="Van">Van</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </p>
+                    <p><b>Vehicle Type</b>
+                    <select name="type" id="">
+                        <option value="Used">Used</option>
+                        <option value="New">New</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Antique">Antique</option>
+                    </select>
+                </p>
                     <p><b>Drivetrain</b><input type="text" placeholder="Drivetrain..." oninput="this.className = ''" name="drivetrain"></p>
-                    <p><b>Seats</b><input type="number" placeholder="Seats..." oninput="this.className = ''" name="seats"></p>
-                    <p><b>Doors</b><input type="number" placeholder="Doors..." oninput="this.className = ''" name="doors"></p>
+                    <p><b>Seats</b>
+                    <select name="seats" id="">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </p>
+                    <p><b>Doors</b>
+                    <select name="doors" id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </p>
                     <p><b>Offer number</b><input type="text" placeholder="Offer number..." oninput="this.className = ''" name="offer_number"></p>
-                    <p><b>Warranty</b><input type="text" placeholder="Warranty..." oninput="this.className = ''" name="warranty"></p>
+                    <p><b>Warranty</b>
+                    <select name="warranty" id="">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle History</h3>
                     <p><b>Mileage</b><input placeholder="Mileage" type="text" oninput="this.className = ''" name="mileage"></p>
                     <p><b>First registration</b><input placeholder="First registration" type="date" oninput="this.className = ''" name="first_registration"></p>
+                    <p><b>Full service history</b>
+                    <select name="service_history" id="">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </p>
+                <p><b>Non-smoker vehicle</b>
+                    <select name="non_smoker" id="">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Technical Data</h3>
                     <p><b>Power</b><input placeholder="Power..." type="text" oninput="this.className = ''" name="power"></p>
-                    <p><b>Gearbox</b><input type="text" placeholder="Gearbox..." oninput="this.className = ''" name="gearbox"></p>
+                    <p><b>Gearbox</b>
+                    <select name="gearbox" id="">
+                        <option value="Automatic">Automatic</option>
+                        <option value="Semi Auto">Semi Auto</option>
+                        <option value="Manual">Manual</option>
+                    </select>
+                </p>
                     <p><b>Engine size</b><input type="text" placeholder="Engine size..." oninput="this.className = ''" name="engine_size"></p>
                     <p><b>Gears</b><input type="number" placeholder="Gears..." oninput="this.className = ''" name="gears"></p>
                     <p><b>Cylinders</b><input type="number" placeholder="Cylinders..." oninput="this.className = ''" name="cylinders"></p>
@@ -53,7 +117,14 @@
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Energy Consumption</h3>
-                    <p><b>Fuel type</b><input type="text" placeholder="Fuel type..." oninput="this.className = ''" name="fuel_type"></p>
+                    <p><b>Fuel type</b>
+                    <select name="fuel_type" id="">
+                        <option value="Diesel">Diesel</option>
+                        <option value="Gasoline">Gasoline</option>
+                        <option value="Electric">Electric</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </p>
                     <p><b>Fuel consumption2</b><input type="text" placeholder="Fuel consumption2..." oninput="this.className = ''" name="fuel_consumption2"></p>
                     <p><b>CO₂-emissions2</b><input type="text" placeholder="CO₂-emissions2..." oninput="this.className = ''" name="COemissions"></p>
                     <p><b>Emission class</b><input type="text" placeholder="Emission class..." oninput="this.className = ''" name="emission_class"></p>

@@ -72,6 +72,8 @@ class CarController extends Controller
                 'upholstery_colour' => $request->upholstery_colour ?? '',
                 'upholstery' => $request->upholstery ?? '',
                 'description' => $request->vehicle_description ?? '',
+                'service_history' => $request->vehicle_service_history ?? '',
+                'non_smoker' => $request->vehicle_non_smoker ?? '',
             ]);
 
 
@@ -174,6 +176,8 @@ class CarController extends Controller
                 'upholstery_colour' => $request->upholstery_colour ?? '',
                 'upholstery' => $request->upholstery ?? '',
                 'description' => $request->vehicle_description ?? '',
+                'service_history' => $request->vehicle_service_history ?? '',
+                'non_smoker' => $request->vehicle_non_smoker ?? '',
             ]);
 
 

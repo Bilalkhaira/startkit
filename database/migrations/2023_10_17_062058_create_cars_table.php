@@ -47,6 +47,8 @@ return new class extends Migration
             $table->string('upholstery_colour')->nullable();
             $table->string('upholstery')->nullable();
             $table->longText('description')->nullable();
+            $table->string('service_history')->nullable();
+            $table->string('non_smoker')->nullable();
             $table->timestamps();
         });
     }
