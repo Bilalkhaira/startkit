@@ -170,36 +170,50 @@ class UserController extends Controller
                 return response()->json('Please enter new and old password both');
             }
         }
-        $imgpath = public_path('images/profile/');
-        if (empty($request->profileImg)) {
-            $updateimage = $user->profile_photo_path;
-        } else {
-            $imagePath =  $imgpath . $user->profile_photo_path;
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
-            }
-            $destinationPath = $imgpath;
-            $file = $request->profileImg;
-            $fileName = time() . '.' . $file->clientExtension();
-            $file->move($destinationPath, $fileName);
-            $updateimage = $fileName;
-        }
+        
         try {
-
-            $imageAsset = 'https://001cars.mradevelopers.com/images/profile/' . $updateimage;
-            // $imageAsset = asset($imageAsset);
 
             $user->update([
                 'name' => $request->name ?? '',
-                'phone' => $request->phone ?? '',
+                'phone_no' => $request->phone ?? '',
                 'zip_code' => $request->zip_code ?? '',
-                'profile_photo_path' => $imageAsset ?? '',
                 'password'      => (!empty($newpassword)) ? $newpassword : $user->password,
             ]);
             return response()->json($user);
         } catch (Exception $e) {
             toastr()->error($e->getMessage());
         }
+        
+    }
+
+    public function updateUserPhoto(Request $request)
+    {
+        $user = User::find($request->updateId);
+       
+        $imgpath = public_path('images/profile/');
+        if (empty($request->profileImg)) {
+            return response()->json('first select image then submit');
+        } else {
+            $imagePath = $user->profile_photo_path;
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            $file = $request->profileImg;
+            $fileName = time() . '.' . $file->clientExtension();
+            $file->move($imgpath, $fileName);
+            try {
+
+                $imageAsset = 'https://001cars.mradevelopers.com/images/profile/' . $fileName;
+    
+                $user->update([
+                    'profile_photo_path' => $imageAsset ?? '',
+                ]);
+                return response()->json($user);
+            } catch (Exception $e) {
+                toastr()->error($e->getMessage());
+            }
+        }
+       
         
     }
 

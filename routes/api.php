@@ -38,8 +38,10 @@ Route::get('/get-car-data/{id}', [CarApiController::class, 'show']);
 Route::get('/get-all-blogs-data', [BlogApiController::class, 'index']);
 Route::get('/get-blog-data/{id}', [BlogApiController::class, 'show']);
 
+Route::post('/save-car-request', [CarRequestController::class, 'saveCarRequest']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('update-user-profile', [UserController::class, 'updateUserProfile']);
-    Route::post('/save-car-request', [CarRequestController::class, 'saveCarRequest']);
+    Route::post('update-user-photo', [UserController::class, 'updateUserPhoto']);
     Route::get('/get-user/{id}', [UserController::class, 'getUser']);
 });

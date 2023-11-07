@@ -10,6 +10,7 @@ use App\Models\CarImages;
 use Illuminate\Http\Request;
 use App\DataTables\CarsDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\CarModel;
 
 class CarController extends Controller
 {
@@ -26,8 +27,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        $user = User::find(1);
-        return view('pages.cars.add');
+        $carModels = CarModel::whereNull('parrent_id')->get();
+        return view('pages.cars.add', compact('carModels'));
     }
 
     /**
@@ -36,13 +37,27 @@ class CarController extends Controller
     public function store(Request $request)
     {
         try {
+            if(!empty($request->model3)){
+                $carModel = CarModel::find($request->model3);
+                $model = $carModel->name;
+
+                $decodeModel = $request->model;
+                $decodeModel[] = $request->model3;
+            } else {
+                $carModel = CarModel::find($request->model[1]);
+                $model = $carModel->name;
+                $decodeModel = $request->model;
+            }
+
+            
+
             $newRecord = Car::create([
                 'created_by' => auth()->user()->id ?? '',
                 'seller_name' => $request->seller_name ?? '',
                 'seller_phone' => $request->seller_phone ?? '',
                 'seller_address' => $request->seller_address ?? '',
                 'seller_email' => $request->seller_email ?? '',
-                'vehicle_name' => $request->vehicle_name ?? '',
+                'vehicle_name' => $model ?? '',
                 'vehicle_price' => $request->vehicle_price ?? '',
                 'gearbox' => $request->gearbox ?? '',
                 'first_registration' => $request->first_registration ?? '',
@@ -72,8 +87,9 @@ class CarController extends Controller
                 'upholstery_colour' => $request->upholstery_colour ?? '',
                 'upholstery' => $request->upholstery ?? '',
                 'description' => $request->vehicle_description ?? '',
-                'service_history' => $request->vehicle_service_history ?? '',
-                'non_smoker' => $request->vehicle_non_smoker ?? '',
+                'service_history' => $request->service_history ?? '',
+                'non_smoker' => $request->non_smoker ?? '',
+                'models' => json_encode($decodeModel) ?? '',
             ]);
 
 
@@ -122,10 +138,32 @@ class CarController extends Controller
      */
     public function edit($id)
     {
+
+
         try {
             $car = Car::with('images')->where('id', $id)->first();
 
-            return view('pages.cars.edit', compact('car'));
+            $models = CarModel::whereNull('parrent_id')->get();
+
+            $carModels = json_decode($car->models);
+
+            $models2 = CarModel::where('parrent_id', $carModels[0])->get();
+
+            if(count($carModels) == 3) {
+
+                $models3 = CarModel::where('parrent_id', $carModels[1])->get();
+
+                return view('pages.cars.edit', compact(['car', 'models', 'models2', 'models3']));
+            } else {
+                return view('pages.cars.edit', compact(['car', 'models', 'models2']));
+            }
+
+
+
+
+
+
+            
        } catch (Exception $e) {
             toastr()->error($e);
 
@@ -139,6 +177,18 @@ class CarController extends Controller
     public function update(Request $request)
     {
         try {
+            if(!empty($request->model3)){
+                $carModel = CarModel::find($request->model3);
+                $model = $carModel->name;
+
+                $decodeModel = $request->model;
+                $decodeModel[] = $request->model3;
+            } else {
+                $carModel = CarModel::find($request->model[1]);
+                $model = $carModel->name;
+                $decodeModel = $request->model;
+            }
+
             $updateRecord = Car::find($request->updateId);
 
             $updateRecord->update([
@@ -146,7 +196,7 @@ class CarController extends Controller
                 'seller_phone' => $request->seller_phone ?? '',
                 'seller_address' => $request->seller_address ?? '',
                 'seller_email' => $request->seller_email ?? '',
-                'vehicle_name' => $request->vehicle_name ?? '',
+                'vehicle_name' => $model ?? '',
                 'vehicle_price' => $request->vehicle_price ?? '',
                 'gearbox' => $request->gearbox ?? '',
                 'first_registration' => $request->first_registration ?? '',
@@ -176,8 +226,9 @@ class CarController extends Controller
                 'upholstery_colour' => $request->upholstery_colour ?? '',
                 'upholstery' => $request->upholstery ?? '',
                 'description' => $request->vehicle_description ?? '',
-                'service_history' => $request->vehicle_service_history ?? '',
-                'non_smoker' => $request->vehicle_non_smoker ?? '',
+                'service_history' => $request->service_history ?? '',
+                'non_smoker' => $request->non_smoker ?? '',
+                'models' => json_encode($decodeModel) ?? '',
             ]);
 
 
@@ -253,6 +304,19 @@ class CarController extends Controller
             $imgRecord->delete();
 
             return response()->json('true');
+       } catch (Exception $e) {
+            toastr()->error($e);
+
+            return redirect()->back();
+        }
+    }
+
+    public function getModels($id)
+    {
+        try {
+            $carModels = CarModel::where('parrent_id', $id)->get();
+
+            return response()->json($carModels);
        } catch (Exception $e) {
             toastr()->error($e);
 

@@ -49,6 +49,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('service_history')->nullable();
             $table->string('non_smoker')->nullable();
+            $table->string('models')->nullable();
             $table->timestamps();
         });
     }

@@ -27,110 +27,89 @@
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle Basic Data</h3>
-                    <p><b> Make</b>
-                        <select name="model[]" id="make">
-                            <option>Select Make</option>
-                            @foreach($carModels as $carModel)
-                            <option value="{{ $carModel->id }}">{{ $carModel->name }}</option>
-                            @endforeach
-                        </select>
-                    </p>
-                    <div class="displayNone" id="appendMain">
-                        <p><b> Select Model</b>
-                            <select name="model[]" id="appendRow">
-                                <option>Select Model</option>
-                            </select>
-                        </p>
-                    </div>
-                    <div id="appendChildRow" class="displayNone">
-                        <p><b>Select Model Again</b>
-                            <select name="model3" id="appendChild">
-                                <option value="">Select Model Again</option>
-                            </select>
-                        </p>
-                    </div>
+                    <p><b> Name</b><input type="text" placeholder="Vehicle Name..." oninput="this.className = ''" name="vehicle_name"></p>
                     <p><b> Price</b><input type="number" placeholder="Vehicle Price..." oninput="this.className = ''" name="vehicle_price"></p>
                     <p><b>Body type</b>
-                        <select name="body_type" id="">
-                            <option value="Compact">Compact</option>
-                            <option value="Convertible">Convertible</option>
-                            <option value="Coup">Coup</option>
-                            <option value="SUV/ Off-road">SUV/ Off-road</option>
-                            <option value="Station Wagon">Station Wagon</option>
-                            <option value="Sedan">Sedan</option>
-                            <option value="Van">Van</option>
-                            <option value="Others">Others</option>
-                        </select>
-                    </p>
+                    <select name="body_type" id="">
+                        <option value="Compact">Compact</option>
+                        <option value="Convertible">Convertible</option>
+                        <option value="Coup">Coup</option>
+                        <option value="SUV/ Off-road">SUV/ Off-road</option>
+                        <option value="Station Wagon">Station Wagon</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="Van">Van</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </p>
                     <p><b>Vehicle Type</b>
-                        <select name="type" id="">
-                            <option value="Used">Used</option>
-                            <option value="New">New</option>
-                            <option value="Classic">Classic</option>
-                            <option value="Antique">Antique</option>
-                        </select>
-                    </p>
+                    <select name="type" id="">
+                        <option value="Used">Used</option>
+                        <option value="New">New</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Antique">Antique</option>
+                    </select>
+                </p>
                     <p><b>Drivetrain</b><input type="text" placeholder="Drivetrain..." oninput="this.className = ''" name="drivetrain"></p>
                     <p><b>Seats</b>
-                        <select name="seats" id="">
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </p>
+                    <select name="seats" id="">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </p>
                     <p><b>Doors</b>
-                        <select name="doors" id="">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                        </select>
-                    </p>
+                    <select name="doors" id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </p>
                     <p><b>Offer number</b><input type="text" placeholder="Offer number..." oninput="this.className = ''" name="offer_number"></p>
                     <p><b>Warranty</b>
-                        <select name="warranty" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </p>
+                    <select name="warranty" id="">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Vehicle History</h3>
                     <p><b>Mileage</b><input placeholder="Mileage" type="text" oninput="this.className = ''" name="mileage"></p>
                     <p><b>First registration</b><input placeholder="First registration" type="date" oninput="this.className = ''" name="first_registration"></p>
                     <p><b>Full service history</b>
-                        <select name="service_history" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </p>
-                    <p><b>Non-smoker vehicle</b>
-                        <select name="non_smoker" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </p>
+                    <select name="service_history" id="">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </p>
+                <p><b>Non-smoker vehicle</b>
+                    <select name="non_smoker" id="">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </p>
                 </div>
                 <div class="tab">
                     <h3 class="mb-5">Technical Data</h3>
                     <p><b>Power</b><input placeholder="Power..." type="text" oninput="this.className = ''" name="power"></p>
                     <p><b>Gearbox</b>
-                        <select name="gearbox" id="">
-                            <option value="Automatic">Automatic</option>
-                            <option value="Semi Auto">Semi Auto</option>
-                            <option value="Manual">Manual</option>
-                        </select>
-                    </p>
+                    <select name="gearbox" id="">
+                        <option value="Automatic">Automatic</option>
+                        <option value="Semi Auto">Semi Auto</option>
+                        <option value="Manual">Manual</option>
+                    </select>
+                </p>
                     <p><b>Engine size</b><input type="text" placeholder="Engine size..." oninput="this.className = ''" name="engine_size"></p>
                     <p><b>Gears</b><input type="number" placeholder="Gears..." oninput="this.className = ''" name="gears"></p>
                     <p><b>Cylinders</b><input type="number" placeholder="Cylinders..." oninput="this.className = ''" name="cylinders"></p>
@@ -139,13 +118,13 @@
                 <div class="tab">
                     <h3 class="mb-5">Energy Consumption</h3>
                     <p><b>Fuel type</b>
-                        <select name="fuel_type" id="">
-                            <option value="Diesel">Diesel</option>
-                            <option value="Gasoline">Gasoline</option>
-                            <option value="Electric">Electric</option>
-                            <option value="Hybrid">Hybrid</option>
-                        </select>
-                    </p>
+                    <select name="fuel_type" id="">
+                        <option value="Diesel">Diesel</option>
+                        <option value="Gasoline">Gasoline</option>
+                        <option value="Electric">Electric</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </p>
                     <p><b>Fuel consumption2</b><input type="text" placeholder="Fuel consumption2..." oninput="this.className = ''" name="fuel_consumption2"></p>
                     <p><b>CO₂-emissions2</b><input type="text" placeholder="CO₂-emissions2..." oninput="this.className = ''" name="COemissions"></p>
                     <p><b>Emission class</b><input type="text" placeholder="Emission class..." oninput="this.className = ''" name="emission_class"></p>
@@ -205,69 +184,6 @@
         <!--end::Card body-->
     </div>
     @push('scripts')
-    <script>
-        $("#appendRow").on("change", function() {
-            var makeId = $(this).val();
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-            });
-
-            $.ajax({
-                url: "/getModels/" + makeId,
-                type: "GET",
-                dataType: "json",
-
-                success: function(response) {
-                    if (response[0] && typeof response[0].id !== 'undefined') {
-                        $("body").find("#appendChildRow").removeClass("displayNone");
-                        $("body").find("#appendChildRow").addClass("displayYes");
-                        $('#appendChild').html('');
-                        response.forEach(item => {
-                            var data = '<option value="' + item.id + '">' + item.name + '</option>';
-                            $('#appendChild').append(data);
-                        });
-                    } else {
-                        $("body").find("#appendChildRow").removeClass("displayYes");
-                        $("body").find("#appendChildRow").addClass("displayNone");
-                    }
-                }
-            });
-
-        });
-
-
-        $("#make").on("change", function() {
-            var makeId = $(this).val();
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-            });
-
-            $.ajax({
-                url: "/getModels/" + makeId,
-                type: "GET",
-                dataType: "json",
-
-                success: function(response) {
-                    $("body").find("#appendChildRow").removeClass();
-                    $("body").find("#appendChildRow").addClass("displayNone");
-
-                    $("body").find("#appendMain").removeClass("displayNone");
-                    $("body").find("#appendMain").addClass("displayYes");
-                    $('#appendRow').html('');
-                    response.forEach(item => {
-                        var data = '<option value="' + item.id + '">' + item.name + '</option>';
-                        $('#appendRow').append(data);
-                    });
-
-                }
-            });
-
-        });
-    </script>
     <script>
         var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab
