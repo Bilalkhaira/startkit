@@ -40,10 +40,17 @@ Breadcrumbs::for('cars', function (BreadcrumbTrail $trail) {
     $trail->push('Cars', route('dashboard'));
 });
 
+
 // Home > Dashboard > Cars 
 Breadcrumbs::for('car-request', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Car Request', route('dashboard'));
+});
+
+// Home > Dashboard > Cars 
+Breadcrumbs::for('seller-request', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Seller Request', route('dashboard'));
 });
 
 // Home > Dashboard > Cars 

@@ -384,8 +384,8 @@ class CarModelSeeder extends Seeder
         //end Ford child
 
 
-         //start Mercedes  child
-         $mercedes = CarModel::create([
+        //start Mercedes  child
+        $mercedes = CarModel::create([
             'name' => 'Mercedes-Benz',
         ]);
 
@@ -402,7 +402,7 @@ class CarModelSeeder extends Seeder
         //end Mercedes  child
 
 
-         //start Mercedes-Benz SUVs  child
+        //start Mercedes-Benz SUVs  child
         $suvs = CarModel::where('name', 'Mercedes-Benz SUVs')->first();
         $suvs_data = [
             ['name' => 'Mercedes-Benz GLA SUV', 'parrent_id' => $suvs->id],
@@ -420,7 +420,7 @@ class CarModelSeeder extends Seeder
 
         //end Mercedes-Benz SUVs  child
 
-         //start Mercedes-Benz Sedans & Wagons  child
+        //start Mercedes-Benz Sedans & Wagons  child
 
         $wagons = CarModel::where('name', 'Mercedes-Benz Sedans & Wagons')->first();
         $wagons_data = [
@@ -440,70 +440,128 @@ class CarModelSeeder extends Seeder
 
         //end Mercedes-Benz Sedans & Wagons  child
 
-         //start Mercedes-Benz Hybrids & Electrics  child
+        //start Mercedes-Benz Hybrids & Electrics  child
 
-         $hybrids = CarModel::where('name', 'Mercedes-Benz Hybrids & Electrics')->first();
-         $hybrids_data = [
-             ['name' => 'Mercedes-Benz GLC SUV (Hybrid)', 'parrent_id' => $hybrids->id],
-             ['name' => 'Mercedes-Benz EQS Sedan', 'parrent_id' => $hybrids->id],
-             ['name' => 'Mercedes-Benz EQE Sedan', 'parrent_id' => $hybrids->id],
-             ['name' => 'Mercedes-Benz EQA CUV', 'parrent_id' => $hybrids->id],
-             ['name' => 'Mercedes-Benz EQB CUV', 'parrent_id' => $hybrids->id],
-             ['name' => 'Mercedes-Benz EQC SUV', 'parrent_id' => $hybrids->id],
-             ['name' => 'Mercedes-Benz EQE SUV', 'parrent_id' => $hybrids->id],
-             ['name' => 'Mercedes-Benz EQS SUV', 'parrent_id' => $hybrids->id],
-         ];
- 
-         CarModel::insert($hybrids_data);
- 
-         //end Mercedes-Benz Hybrids & Electrics  child
+        $hybrids = CarModel::where('name', 'Mercedes-Benz Hybrids & Electrics')->first();
+        $hybrids_data = [
+            ['name' => 'Mercedes-Benz GLC SUV (Hybrid)', 'parrent_id' => $hybrids->id],
+            ['name' => 'Mercedes-Benz EQS Sedan', 'parrent_id' => $hybrids->id],
+            ['name' => 'Mercedes-Benz EQE Sedan', 'parrent_id' => $hybrids->id],
+            ['name' => 'Mercedes-Benz EQA CUV', 'parrent_id' => $hybrids->id],
+            ['name' => 'Mercedes-Benz EQB CUV', 'parrent_id' => $hybrids->id],
+            ['name' => 'Mercedes-Benz EQC SUV', 'parrent_id' => $hybrids->id],
+            ['name' => 'Mercedes-Benz EQE SUV', 'parrent_id' => $hybrids->id],
+            ['name' => 'Mercedes-Benz EQS SUV', 'parrent_id' => $hybrids->id],
+        ];
 
-          //start Mercedes-Benz Coupes  child
+        CarModel::insert($hybrids_data);
 
-          $mercedesCoupes = CarModel::where('name', 'Mercedes-Benz Coupes')->first();
-          $mercedesCoupes_data = [
-              ['name' => 'Mercedes-Benz CLA Coupe', 'parrent_id' => $mercedesCoupes->id],
-              ['name' => 'Mercedes-Benz C-Class Coupe', 'parrent_id' => $mercedesCoupes->id],
-              ['name' => 'Mercedes-Benz E-Class Coupe', 'parrent_id' => $mercedesCoupes->id],
-              ['name' => 'Mercedes-Benz CLS Coupe', 'parrent_id' => $mercedesCoupes->id],
-              ['name' => 'Mercedes-Benz S-Class Coupe', 'parrent_id' => $mercedesCoupes->id],
+        //end Mercedes-Benz Hybrids & Electrics  child
+
+        //start Mercedes-Benz Coupes  child
+
+        $mercedesCoupes = CarModel::where('name', 'Mercedes-Benz Coupes')->first();
+        $mercedesCoupes_data = [
+            ['name' => 'Mercedes-Benz CLA Coupe', 'parrent_id' => $mercedesCoupes->id],
+            ['name' => 'Mercedes-Benz C-Class Coupe', 'parrent_id' => $mercedesCoupes->id],
+            ['name' => 'Mercedes-Benz E-Class Coupe', 'parrent_id' => $mercedesCoupes->id],
+            ['name' => 'Mercedes-Benz CLS Coupe', 'parrent_id' => $mercedesCoupes->id],
+            ['name' => 'Mercedes-Benz S-Class Coupe', 'parrent_id' => $mercedesCoupes->id],
+        ];
+
+        CarModel::insert($mercedesCoupes_data);
+
+        //end Mercedes-Benz Coupes  child
+
+        //start Mercedes-Benz Convertibles & Roadsters  child
+
+        $roadsters = CarModel::where('name', 'Mercedes-Benz Convertibles & Roadsters')->first();
+        $roadsters_data = [
+            ['name' => 'Mercedes-Benz C-Class Cabriolet', 'parrent_id' => $roadsters->id],
+            ['name' => 'Mercedes-Benz E-Class Cabriolet', 'parrent_id' => $roadsters->id],
+            ['name' => 'Mercedes-Benz S-Class Cabriolet', 'parrent_id' => $roadsters->id],
+            ['name' => 'Mercedes-Benz SL Roadster', 'parrent_id' => $roadsters->id],
+        ];
+
+        CarModel::insert($roadsters_data);
+
+        //end Mercedes-Benz Convertibles & Roadsters  child
+
+        //start opel  child
+        $opel = CarModel::create([
+            'name' => 'Opel',
+        ]);
+          $opel_data = [
+              ['name' => 'Adam', 'parrent_id' => $opel->id],
+              ['name' => 'Admiral', 'parrent_id' => $opel->id],
+              ['name' => 'Agila', 'parrent_id' => $opel->id],
+              ['name' => 'Ampera', 'parrent_id' => $opel->id],
+              ['name' => 'Antara', 'parrent_id' => $opel->id],
+              ['name' => 'Ascona', 'parrent_id' => $opel->id],
+              ['name' => 'Astra', 'parrent_id' => $opel->id],
+              ['name' => 'Astra OPC', 'parrent_id' => $opel->id],
+              ['name' => 'Calibra', 'parrent_id' => $opel->id],
+              ['name' => 'Campo', 'parrent_id' => $opel->id],
+              ['name' => 'Cascada', 'parrent_id' => $opel->id],
+              ['name' => 'Combo', 'parrent_id' => $opel->id],
+              ['name' => 'Commodore', 'parrent_id' => $opel->id],
+              ['name' => 'Corsa', 'parrent_id' => $opel->id],
+              ['name' => 'Corsa OPC', 'parrent_id' => $opel->id],
+              ['name' => 'Crossland X', 'parrent_id' => $opel->id],
+              ['name' => 'Diplomat', 'parrent_id' => $opel->id],
+              ['name' => 'Frontera', 'parrent_id' => $opel->id],
+              ['name' => 'Grandland', 'parrent_id' => $opel->id],
+              ['name' => 'GT', 'parrent_id' => $opel->id],
+              ['name' => 'Insignia', 'parrent_id' => $opel->id],
+              ['name' => 'Insignia GSi', 'parrent_id' => $opel->id],
+              ['name' => 'Insignia OPC', 'parrent_id' => $opel->id],
+              ['name' => 'Kadett', 'parrent_id' => $opel->id],
+              ['name' => 'Kapitan', 'parrent_id' => $opel->id],
+              ['name' => 'Karl', 'parrent_id' => $opel->id],
+              ['name' => 'Manta', 'parrent_id' => $opel->id],
+              ['name' => 'Meriva', 'parrent_id' => $opel->id],
+              ['name' => 'Meriva OPC', 'parrent_id' => $opel->id],
+              ['name' => 'Mokka', 'parrent_id' => $opel->id],
+              ['name' => 'Monterey', 'parrent_id' => $opel->id],
+              ['name' => 'Monza', 'parrent_id' => $opel->id],
+              ['name' => 'Olympia', 'parrent_id' => $opel->id],
+              ['name' => 'Omega', 'parrent_id' => $opel->id],
+              ['name' => 'P4', 'parrent_id' => $opel->id],
+              ['name' => 'Rekord', 'parrent_id' => $opel->id],
+              ['name' => 'Rocks-e', 'parrent_id' => $opel->id],
+              ['name' => 'Senator', 'parrent_id' => $opel->id],
+              ['name' => 'Signum', 'parrent_id' => $opel->id],
+              ['name' => 'Sintra', 'parrent_id' => $opel->id],
+              ['name' => 'Speedster', 'parrent_id' => $opel->id],
+              ['name' => 'Super Six', 'parrent_id' => $opel->id],
+              ['name' => 'Tigra', 'parrent_id' => $opel->id],
+              ['name' => 'Vectra', 'parrent_id' => $opel->id],
+              ['name' => 'Vectra OPC', 'parrent_id' => $opel->id],
+              ['name' => 'Vita', 'parrent_id' => $opel->id],
+              ['name' => 'Vivaro', 'parrent_id' => $opel->id],
+              ['name' => 'Zafira', 'parrent_id' => $opel->id],
+              ['name' => 'Zafira Life', 'parrent_id' => $opel->id],
+              ['name' => 'Zafira OPC', 'parrent_id' => $opel->id],
           ];
-  
-          CarModel::insert($mercedesCoupes_data);
-  
-          //end Mercedes-Benz Coupes  child
 
-          //start Mercedes-Benz Convertibles & Roadsters  child
+          CarModel::insert($opel_data);
 
-          $roadsters = CarModel::where('name', 'Mercedes-Benz Convertibles & Roadsters')->first();
-          $roadsters_data = [
-              ['name' => 'Mercedes-Benz C-Class Cabriolet', 'parrent_id' => $roadsters->id],
-              ['name' => 'Mercedes-Benz E-Class Cabriolet', 'parrent_id' => $roadsters->id],
-              ['name' => 'Mercedes-Benz S-Class Cabriolet', 'parrent_id' => $roadsters->id],
-              ['name' => 'Mercedes-Benz SL Roadster', 'parrent_id' => $roadsters->id],
-          ];
-  
-          CarModel::insert($roadsters_data);
-  
-          //end Mercedes-Benz Convertibles & Roadsters  child
+        //end opel  child
 
 
 
-
-
-
-
-          
-          //start bmw  child
-
+         //start bmw  child
+        // $mercedes = CarModel::create([
+        //     'name' => 'Mercedes-Benz',
+        // ]);
         //   $x3 = CarModel::where('name', 'X3')->first();
         //   $bmw_data = [
         //       ['name' => '', 'parrent_id' => $bmw->id],
         //   ];
-  
+
         //   CarModel::insert($bmw_data);
-  
-          //end bmw  child
+
+        //end bmw  child
 
 
     }

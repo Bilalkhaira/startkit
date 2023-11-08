@@ -95,6 +95,14 @@
 			@endif
 			<div class="menu-item">
 				<!--begin:Menu link-->
+				<a class="menu-link" href="{{ route('seller-request.index') }}">
+					<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+					<span class="menu-title">Seller Request</span>
+				</a>
+				<!--end:Menu link-->
+			</div>
+			<div class="menu-item">
+				<!--begin:Menu link-->
 				<a class="menu-link" href="{{ route('cars.index') }}">
 					<span class="menu-icon">{!! getIcon('car', 'fs-2') !!}</span>
 					<span class="menu-title">Cars</span>

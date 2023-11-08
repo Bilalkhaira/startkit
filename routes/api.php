@@ -6,6 +6,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CarApiController;
 use App\Http\Controllers\API\BlogApiController;
 use App\Http\Controllers\API\CarRequestController;
+use App\Http\Controllers\API\SellerRequestApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,12 @@ Route::get('/get-all-blogs-data', [BlogApiController::class, 'index']);
 Route::get('/get-blog-data/{id}', [BlogApiController::class, 'show']);
 
 Route::post('/save-car-request', [CarRequestController::class, 'saveCarRequest']);
+
+Route::post('/filter-cars', [CarApiController::class, 'filterCar']);
+Route::post('/filter-cars-by-range', [CarApiController::class, 'filterCarByRange']);
+Route::get('/filter-cars-get-request/{model}', [CarApiController::class, 'filterCarGetRequest']);
+
+Route::post('/save-seller-request', [SellerRequestApiController::class, 'saveSellerRequest']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('update-user-profile', [UserController::class, 'updateUserProfile']);
