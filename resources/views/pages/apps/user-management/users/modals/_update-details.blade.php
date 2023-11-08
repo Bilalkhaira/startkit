@@ -71,7 +71,7 @@
                                         <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ asset('images/profile/'.$user->avatar ?? $user->profile_photo_url) }});"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Edit-->
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                             <i class="ki-duotone ki-pencil fs-7">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>

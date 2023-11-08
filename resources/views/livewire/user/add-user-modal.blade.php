@@ -47,7 +47,7 @@
                                 @endif
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
-                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                     {!! getIcon('pencil','fs-7') !!}
                                     <!--begin::Inputs-->
                                     <input type="file" wire:model.defer="avatar" name="avatar" accept=".png, .jpg, .jpeg"/>
