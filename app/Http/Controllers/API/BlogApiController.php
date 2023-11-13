@@ -24,8 +24,9 @@ class BlogApiController extends Controller
             return response()->json($blogs);
 
         }catch (Exception $e){
-
-            return response()->json($e);
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 
@@ -39,7 +40,9 @@ class BlogApiController extends Controller
 
         }catch (Exception $e){
 
-            return response()->json($e);
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 }

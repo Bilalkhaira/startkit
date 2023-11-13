@@ -11,20 +11,57 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CarApiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+       
         try{
+            if(!empty($request->all())){
+                if(!empty($request->model) && !empty($request->max) && !empty($request->min)){ 
+                    $cars = Car::where('vehicle_name', $request->model)
+                            ->whereBetween('vehicle_price', [$request->min, $request->max])
+                            ->with('images')->get();
+                 }
+                
+                elseif(!empty($request->model) && !empty($request->price)){
+                    $cars = Car::where('vehicle_name', $request->model)
+                            ->where('vehicle_price', $request->price)
+                            ->with('images')->get();
+                 }
 
-           $cars = Car::with('images')->get();
-           foreach($cars as $key => $path)
-           {
-            $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
-           }
+                elseif(!empty($request->model)){ 
+                    $cars = Car::where('vehicle_name', $request->model)
+                            ->with('images')->get();
+                 } 
+
+                elseif(!empty($request->max) && !empty($request->min)){ 
+                    $cars = Car::whereBetween('vehicle_price', [$request->min, $request->max])
+                            ->with('images')->get();
+                 }
+
+                elseif(!empty($request->price)){ 
+                    $cars = Car::where('vehicle_price', $request->price)
+                            ->with('images')->get();
+                 }
+
+                else{ 
+                    $success['status'] =  400;
+                    return response()->json($success);
+                 }
+
+            } else {
+                $cars = Car::with('images')->get();
+            }
+            foreach($cars as $key => $path)
+            {
+                $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
+            }
             return response()->json($cars);
 
         }catch (Exception $e){
 
-            return response()->json($e);
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 
@@ -46,87 +83,121 @@ class CarApiController extends Controller
 
         }catch (Exception $e){
 
-            return response()->json($e);
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 
-    public function filterCar(Request $request)
-    {
-        try
-        {
-        if( !empty($request->model) && !empty($request->price))
-        {
-            $cars = Car::where('vehicle_name', $request->model)->where('vehicle_price', $request->price)->get();
+    // public function filterCar(Request $request)
+    // {
+    //     try
+    //     {
+    //     if( !empty($request->model) && !empty($request->price))
+    //     {
+    //         $cars = Car::where('vehicle_name', $request->model)->where('vehicle_price', $request->price)->get();
 
-        } else {
-            $cars = Car::query()
-            ->when(request('model'), function (Builder $query, string $search) {
-                $query->where('vehicle_name', $search);
-            })
-            ->when(request('price'), function (Builder $query, string $price) {
-                $query->whereBetween('vehicle_price', [1, $price]);
-            })
-            ->get();
-        }
+    //     } else {
+    //         $cars = Car::query()
+    //         ->when(request('model'), function (Builder $query, string $search) {
+    //             $query->where('vehicle_name', $search);
+    //         })
+    //         ->when(request('price'), function (Builder $query, string $price) {
+    //             $query->whereBetween('vehicle_price', [1, $price]);
+    //         })
+    //         ->with('images')->get();
+    //     }
 
-        foreach($cars as $key => $path)
-        {
-         $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
-        }
-         return response()->json($cars);
+    //     foreach($cars as $key => $path)
+    //     {
+    //      $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
+    //     }
+    //      return response()->json($cars);
 
-        }catch (Exception $e){
+    //     }catch (Exception $e){
 
-            return response()->json($e);
-        }
+    //         return response()->json($e);
+    //     }
       
-    }
+    // }
 
-    public function filterCarGetRequest($model)
-    {
-        try
-        {
-            $cars = Car::query()
-            ->when(request('model'), function (Builder $query, string $search) {
-                $query->where('vehicle_name', $search);
-            })
-            ->get();
+    // public function filterCar(Request $request)
+    // {
+    //     try
+    //     {
+    //     if( !empty($request->model) && !empty($request->price))
+    //     {
+    //         $cars = Car::where('vehicle_name', $request->model)->where('vehicle_price', $request->price)->get();
 
-        foreach($cars as $key => $path)
-        {
-         $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
-        }
-         return response()->json($cars);
+    //     } else {
+    //         $cars = Car::query()
+    //         ->when(request('model'), function (Builder $query, string $search) {
+    //             $query->where('vehicle_name', $search);
+    //         })
+    //         ->when(request('price'), function (Builder $query, string $price) {
+    //             $query->whereBetween('vehicle_price', [1, $price]);
+    //         })
+    //         ->get();
+    //     }
 
-        }catch (Exception $e){
+    //     foreach($cars as $key => $path)
+    //     {
+    //      $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
+    //     }
+    //      return response()->json($cars);
 
-            return response()->json($e);
-        }
+    //     }catch (Exception $e){
+
+    //         return response()->json($e);
+    //     }
       
-    }
+    // }
 
-    public function filterCarByRange(Request $request)
-    {
-        try
-        {
-        if( !empty($request->max_range) && !empty($request->min_range))
-        {
-            $cars = Car::whereBetween('vehicle_price', [$request->min_range, $request->max_range])->get();
+    // public function filterCarGetRequest($model)
+    // {
+    //     try
+    //     {
+    //         $cars = Car::query()
+    //         ->when(request('model'), function (Builder $query, string $search) {
+    //             $query->where('vehicle_name', $search);
+    //         })
+    //         ->get();
 
-        } else {
-            return response()->json('First enter max and min range then form submit');
-        }
+    //     foreach($cars as $key => $path)
+    //     {
+    //      $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
+    //     }
+    //      return response()->json($cars);
 
-        foreach($cars as $key => $path)
-        {
-         $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
-        }
-         return response()->json($cars);
+    //     }catch (Exception $e){
 
-        }catch (Exception $e){
-
-            return response()->json($e);
-        }
+    //         return response()->json($e);
+    //     }
       
-    }
+    // }
+
+    // public function filterCarByRange(Request $request)
+    // {
+    //     try
+    //     {
+    //     if( !empty($request->max_range) && !empty($request->min_range))
+    //     {
+    //         $cars = Car::whereBetween('vehicle_price', [$request->min_range, $request->max_range])->get();
+
+    //     } else {
+    //         return response()->json('First enter max and min range then form submit');
+    //     }
+
+    //     foreach($cars as $key => $path)
+    //     {
+    //      $cars[$key]['image_path'] = 'https://001cars.mradevelopers.com/images/';
+    //     }
+    //      return response()->json($cars);
+
+    //     }catch (Exception $e){
+
+    //         return response()->json($e);
+    //     }
+      
+    // }
 }

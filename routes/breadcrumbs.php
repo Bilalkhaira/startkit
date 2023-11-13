@@ -54,6 +54,12 @@ Breadcrumbs::for('seller-request', function (BreadcrumbTrail $trail) {
 });
 
 // Home > Dashboard > Cars 
+Breadcrumbs::for('contact-request', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Contact Request', route('dashboard'));
+});
+
+// Home > Dashboard > Cars 
 Breadcrumbs::for('blogs', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Blog', route('dashboard'));

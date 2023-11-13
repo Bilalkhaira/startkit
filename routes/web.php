@@ -9,6 +9,7 @@ use App\Http\Controllers\CarRequestsController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\SellerRequestController;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
@@ -63,6 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('cars', CarController::class);
     Route::resource('car-request', CarRequestsController::class);
     Route::resource('seller-request', SellerRequestController::class);
+    Route::resource('contact-request', ContactRequestController::class);
     Route::resource('blogs', BlogController::class);
     Route::post('/blog-update', [BlogController::class, 'blogUpdate'])->name('blogUpdate');
     Route::get('/imgDelete/{id?}', [CarController::class, 'imgDelete'])->name('cars.imgDelete');

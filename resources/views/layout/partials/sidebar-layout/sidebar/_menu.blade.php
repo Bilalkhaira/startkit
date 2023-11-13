@@ -92,6 +92,14 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
+			<div class="menu-item">
+				<!--begin:Menu link-->
+				<a class="menu-link" href="{{ route('contact-request.index') }}">
+					<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+					<span class="menu-title">Contact Request</span>
+				</a>
+				<!--end:Menu link-->
+			</div>
 			@endif
 			<div class="menu-item">
 				<!--begin:Menu link-->

@@ -20,10 +20,14 @@ class UserController extends Controller
         try {
             $user = User::where('email', $request->email)->first();
             if (!empty($user)) {
-                return response()->json('This email already exist try with other email');
+                $success['status'] =  400;
+                $success['message'] =  'This email already exist try with other email';
+                return response()->json($success);
             }
             if (!empty($request->password != $request->confirmpassword)) {
-                return response()->json('Your password and confirm password does not match to each other.');
+                $success['status'] =  400;
+                $success['message'] =  'Your password and confirm password does not match to each other.';
+                return response()->json($success);
             } else {
 
                 $password = Hash::make($request->password);
@@ -44,7 +48,9 @@ class UserController extends Controller
             }
         } catch (Exception $e) {
 
-            return response()->json($e->getMessage());
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 
@@ -53,7 +59,7 @@ class UserController extends Controller
         try {
             $user = User::where('email', $request->email)->first();
             if (empty($user)) {
-                return response()->json('First registor then login');
+                return response()->json(['First registor then login', 400]);
             } else {
 
                 if (Hash::check($request->password, $user->password)) {
@@ -68,12 +74,16 @@ class UserController extends Controller
 
                     return response()->json($success);
                 } else {
-                    return response()->json('Your password is not correct.');
+                    $success['status'] =  400;
+                    $success['message'] =  'Your password is not correct';
+                    return response()->json($success);
                 }
             }
         } catch (Exception $e) {
 
-            return response()->json($e->getMessage());
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 
@@ -93,7 +103,9 @@ class UserController extends Controller
             }
         } catch (Exception $e) {
 
-            return response()->json($e->getMessage());
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 
@@ -103,7 +115,9 @@ class UserController extends Controller
         try {
             $user = User::where('email', $request->email)->first();
             if (empty($user)) {
-                return response()->json('This user is not exit please registor');
+                $success['status'] =  400;
+                $success['message'] =  'This user is not exit please registor';
+                return response()->json($success);
             } else {
 
                 $token = Str::random(64);
@@ -123,7 +137,9 @@ class UserController extends Controller
             }
         } catch (Exception $e) {
 
-            return response()->json($e->getMessage());
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 
@@ -131,11 +147,15 @@ class UserController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         if (empty($user)) {
-            return response()->json('This user is not exit please registor');
+            $success['status'] =  400;
+            $success['message'] =  'This user is not exit please registor';
+            return response()->json($success);
         }
 
         if ($request->password != $request->password_confirmation) {
-            return response()->json('Password and confirm password are not same');
+            $success['status'] =  400;
+            $success['message'] =  'Password and confirm password are not same';
+            return response()->json($success);
         }
 
         $updatePassword = PasswordReset::where([
@@ -145,7 +165,9 @@ class UserController extends Controller
             ->first();
 
         if (!$updatePassword) {
-            return response()->json('invalid token');
+            $success['status'] =  400;
+            $success['message'] =  'invalid token';
+            return response()->json($success);
         }
 
         $user = User::where('email', $request->email)
@@ -153,7 +175,9 @@ class UserController extends Controller
 
         PasswordReset::where(['email' => $request->email])->delete();
 
-        return response()->json('true');
+        $success['status'] =  200;
+        $success['message'] =  'true';
+        return response()->json($success);
     }
 
     public function updateUserProfile(Request $request)
@@ -164,10 +188,14 @@ class UserController extends Controller
                 if (Hash::check($request->old_password, $user->password)) {
                     $newpassword = Hash::make($request->new_password);
                 } else {
-                    return response()->json('Your Current password does not match our records');
+                    $success['status'] =  400;
+                    $success['message'] =  'Your Current password does not match our records';
+                    return response()->json($success);
                 }
             } else {
-                return response()->json('Please enter new and old password both');
+                $success['status'] =  400;
+                $success['message'] =  'Please enter new and old password both';
+                return response()->json($success);
             }
         }
         
@@ -181,7 +209,9 @@ class UserController extends Controller
             ]);
             return response()->json($user);
         } catch (Exception $e) {
-            toastr()->error($e->getMessage());
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
         
     }
@@ -192,7 +222,9 @@ class UserController extends Controller
        
         $imgpath = public_path('images/profile/');
         if (empty($request->profileImg)) {
-            return response()->json('first select image then submit');
+            $success['status'] =  400;
+            $success['message'] =  'first select image then submit';
+            return response()->json($success);
         } else {
             $imagePath = $user->profile_photo_path;
             if (File::exists($imagePath)) {
@@ -210,7 +242,9 @@ class UserController extends Controller
                 ]);
                 return response()->json($user);
             } catch (Exception $e) {
-                toastr()->error($e->getMessage());
+                $success['status'] =  400;
+                $success['message'] =  $e->getMessage();
+                return response()->json($success);
             }
         }
        
@@ -227,7 +261,9 @@ class UserController extends Controller
 
         }catch (Exception $e){
 
-            return response()->json($e);
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 }

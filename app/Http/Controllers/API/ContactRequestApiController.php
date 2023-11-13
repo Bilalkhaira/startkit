@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
-use Exception;
 use Illuminate\Http\Request;
-use App\Models\SellerRequest;
+use App\Models\ContactRequest;
 use App\Http\Controllers\Controller;
 
-class SellerRequestApiController extends Controller
+class ContactRequestApiController extends Controller
 {
-    public function saveSellerRequest(Request $request)
+    public function save(Request $request)
     {
         try {
             
-            SellerRequest::create([
+            ContactRequest::create([
                 'email' => $request->email ?? '',
                 'name' => $request->name ?? '',
                 'phone' => $request->phone ?? '',

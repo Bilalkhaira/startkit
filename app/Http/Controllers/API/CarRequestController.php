@@ -41,10 +41,14 @@ class CarRequestController extends Controller
             //     'token' => $token->id ?? '',
             // ]);
 
-            return response()->json('Record insert successfully');
+            $success['status'] =  200;
+            $success['message'] =  'Record insert successfully';
+            return response()->json($success);
         } catch (Exception $e) {
 
-            return response()->json($e);
+            $success['status'] =  400;
+            $success['message'] =  $e->getMessage();
+            return response()->json($success);
         }
     }
 }
