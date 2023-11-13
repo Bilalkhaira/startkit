@@ -44,7 +44,7 @@ Breadcrumbs::for('cars', function (BreadcrumbTrail $trail) {
 // Home > Dashboard > Cars 
 Breadcrumbs::for('car-request', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Car Request', route('dashboard'));
+    $trail->push('Dream Car Request', route('dashboard'));
 });
 
 // Home > Dashboard > Cars 

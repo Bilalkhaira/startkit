@@ -88,7 +88,7 @@
 				<!--begin:Menu link-->
 				<a class="menu-link" href="{{ route('car-request.index') }}">
 					<span class="menu-icon">{!! getIcon('rocket', 'fs-2') !!}</span>
-					<span class="menu-title">Car Request</span>
+					<span class="menu-title">Dream Car Request</span>
 				</a>
 				<!--end:Menu link-->
 			</div>

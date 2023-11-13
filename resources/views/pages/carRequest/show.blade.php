@@ -1,7 +1,7 @@
 <x-default-layout>
 
     @section('title')
-    Car Request
+    Dream Car Request
     @endsection
 
     @section('breadcrumbs')
