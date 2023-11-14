@@ -33,6 +33,9 @@ class SellerRequestDataTable extends DataTable
             ->addColumn('action', function (SellerRequest $user) {
                 return view('pages.sellerRequest.columns._actions', compact('user'));
             })
+            ->addColumn('view_car', function (SellerRequest $user) {
+                return view('pages.sellerRequest.columns.view_car', compact('user'));
+            })
             ->setRowId('id');
     }
 
@@ -71,6 +74,7 @@ class SellerRequestDataTable extends DataTable
             Column::make('name')->title('Name'),
             Column::make('phone')->title('Contact No'),
             Column::make('email')->title('Email'),
+            Column::computed('view_car')->title('View Requested Car'),
             Column::computed('action')
                 ->addClass('text-end text-nowrap')
                 ->exportable(false)

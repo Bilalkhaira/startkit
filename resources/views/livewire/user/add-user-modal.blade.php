@@ -97,6 +97,28 @@
                             @error('email')
                             <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2">Phone</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="number" wire:model.defer="phone_no" name="phone_no" class="form-control form-control-solid mb-3 mb-lg-0"/>
+                            <!--end::Input-->
+                            @error('phone_no')
+                            <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2">Address</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" wire:model.defer="address" name="address" class="form-control form-control-solid mb-3 mb-lg-0"/>
+                            <!--end::Input-->
+                            @error('address')
+                            <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        
                         <!--end::Input group-->
                         <!--begin::Input group-->
                         <div class="mb-7">

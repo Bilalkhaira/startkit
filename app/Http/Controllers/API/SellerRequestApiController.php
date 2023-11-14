@@ -18,6 +18,7 @@ class SellerRequestApiController extends Controller
                 'name' => $request->name ?? '',
                 'phone' => $request->phone ?? '',
                 'message' => $request->message ?? '',
+                'car_id' => $request->car_id ?? '',
             ]);
 
             $success['status'] =  200;

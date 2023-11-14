@@ -17,6 +17,8 @@ class AddUserModal extends Component
 
     public $name;
     public $email;
+    public $address;
+    public $phone_no;
     public $role;
     public $avatar;
     public $saved_avatar;
@@ -63,6 +65,8 @@ class AddUserModal extends Component
             // Prepare the data for creating a new user
             $data = [
                 'name' => $this->name,
+                'address' => $this->address,
+                'phone_no' => $this->phone_no,
             ];
 
             if ($this->avatar) {
@@ -126,6 +130,8 @@ class AddUserModal extends Component
         $this->saved_avatar = $user->profile_photo_url;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->phone_no = $user->phone_no;
+        $this->address = $user->address;
         $this->role = $user->roles?->first()->name ?? '';
     }
 

@@ -546,6 +546,10 @@ class CarModelSeeder extends Seeder
 
           CarModel::insert($opel_data);
 
+        CarModel::create([
+            'name' => 'Other',
+        ]);
+
         //end opel  child
 
 

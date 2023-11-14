@@ -17,14 +17,14 @@
                 <h1 class="text-center">Add New Car Post</h1>
                 <!-- One "tab" for each step in the form: -->
 
-                <div class="tab">
+                <!-- <div class="tab">
                     <h3 class="mb-5">Seller Data</h3>
 
                     <p><b> Name</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_name"></p>
                     <p><b> Contact Number</b><input type="number" placeholder="Last name..." oninput="this.className = ''" name="seller_phone"></p>
                     <p><b> Address</b><input type="text" placeholder="Seller name..." oninput="this.className = ''" name="seller_address"></p>
                     <p><b> Email</b><input type="email" placeholder="Seller email..." oninput="this.className = ''" name="seller_email"></p>
-                </div>
+                </div> -->
                 <div class="tab">
                     <h3 class="mb-5">Vehicle Basic Data</h3>
                     <p><b> Make</b>
@@ -49,6 +49,7 @@
                             </select>
                         </p>
                     </div>
+                    <p id="other_model_p"></p>
                     <p><b> Price</b><input type="number" placeholder="Vehicle Price..." oninput="this.className = ''" name="vehicle_price"></p>
                     <p><b>Body type</b>
                         <select name="body_type" id="">
@@ -70,6 +71,50 @@
                             <option value="Antique">Antique</option>
                         </select>
                     </p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label><b>Vehicle Images:</b></label></br>
+                            <input name="images[]" id="fuUpload1" type="file" multiple="multiple" />
+                            <div id="dvPreview" style="margin-bottom: 10px"></div>
+
+                            <div class="col-lg-12">
+                                <div class="row" id="img_append"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tab">
+                    <h3 class="mb-5">Vehicle History</h3>
+                    <p><b>Mileage</b><input placeholder="Mileage" type="text" oninput="this.className = ''" name="mileage"></p>
+                    <p><b>First registration</b><input placeholder="First registration" type="date" oninput="this.className = ''" name="first_registration"></p>
+                    <p><b>Full service history</b>
+                        <select name="service_history" id="">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </p>
+                    <p><b>Non-smoker vehicle</b>
+                        <select name="non_smoker" id="">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </p>
+                </div>
+                <div class="tab">
+                    <h3 class="mb-5">Technical Data</h3>
+                    <p><b>Power</b><input placeholder="Power..." type="text" oninput="this.className = ''" name="power"></p>
+                    <p><b>Gearbox</b>
+                        <select name="gearbox" id="">
+                            <option value="Automatic">Automatic</option>
+                            <option value="Semi Auto">Semi Auto</option>
+                            <option value="Manual">Manual</option>
+                        </select>
+                    </p>
+                    <p><b>Engine size</b><input type="text" placeholder="Engine size..." oninput="this.className = ''" name="engine_size"></p>
+                    <p><b>Gears</b><input type="number" placeholder="Gears..." oninput="this.className = ''" name="gears"></p>
+                    <p><b>Cylinders</b><input type="number" placeholder="Cylinders..." oninput="this.className = ''" name="cylinders"></p>
+                    <p><b>Empty weight</b><input type="text" placeholder="Empty weight..." oninput="this.className = ''" name="empty_weight"></p>
                     <p><b>Drivetrain</b><input type="text" placeholder="Drivetrain..." oninput="this.className = ''" name="drivetrain"></p>
                     <p><b>Seats</b>
                         <select name="seats" id="">
@@ -105,38 +150,6 @@
                     </p>
                 </div>
                 <div class="tab">
-                    <h3 class="mb-5">Vehicle History</h3>
-                    <p><b>Mileage</b><input placeholder="Mileage" type="text" oninput="this.className = ''" name="mileage"></p>
-                    <p><b>First registration</b><input placeholder="First registration" type="date" oninput="this.className = ''" name="first_registration"></p>
-                    <p><b>Full service history</b>
-                        <select name="service_history" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </p>
-                    <p><b>Non-smoker vehicle</b>
-                        <select name="non_smoker" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </p>
-                </div>
-                <div class="tab">
-                    <h3 class="mb-5">Technical Data</h3>
-                    <p><b>Power</b><input placeholder="Power..." type="text" oninput="this.className = ''" name="power"></p>
-                    <p><b>Gearbox</b>
-                        <select name="gearbox" id="">
-                            <option value="Automatic">Automatic</option>
-                            <option value="Semi Auto">Semi Auto</option>
-                            <option value="Manual">Manual</option>
-                        </select>
-                    </p>
-                    <p><b>Engine size</b><input type="text" placeholder="Engine size..." oninput="this.className = ''" name="engine_size"></p>
-                    <p><b>Gears</b><input type="number" placeholder="Gears..." oninput="this.className = ''" name="gears"></p>
-                    <p><b>Cylinders</b><input type="number" placeholder="Cylinders..." oninput="this.className = ''" name="cylinders"></p>
-                    <p><b>Empty weight</b><input type="text" placeholder="Empty weight..." oninput="this.className = ''" name="empty_weight"></p>
-                </div>
-                <div class="tab">
                     <h3 class="mb-5">Energy Consumption</h3>
                     <p><b>Fuel type</b>
                         <select name="fuel_type" id="">
@@ -169,17 +182,7 @@
 
                 <div class="tab">
                     <p><b>Vehicle Description</b><textarea placeholder="Vehicle Description..." oninput="this.className = ''" name="vehicle_description"></textarea></p>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label>Vehicle Images:</label></br>
-                            <input name="images[]" id="fuUpload1" type="file" multiple="multiple" />
-                            <div id="dvPreview" style="margin-bottom: 10px"></div>
-
-                            <div class="col-lg-12">
-                                <div class="row" id="img_append"></div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div style="overflow:auto;">
@@ -190,7 +193,7 @@
                 </div>
                 <!-- Circles which indicates the steps of the form: -->
                 <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
+                    <!-- <span class="step"></span> -->
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
@@ -240,6 +243,19 @@
 
         $("#make").on("change", function() {
             var makeId = $(this).val();
+            if(makeId == 250){
+                var data = '<b>Write Other Model Name</b><input type="text" class="form-control" name="other_model" placeholder="Write Other Model Name">';
+                $('#other_model_p').html('');
+                $('#other_model_p').append(data);
+                
+                $("body").find("#appendMain").removeClass();
+                $("body").find("#appendMain").addClass("displayNone");
+
+                $("body").find("#appendChildRow").removeClass();
+                $("body").find("#appendChildRow").addClass("displayNone");
+            } else {
+                $('#other_model_p').html('');
+            
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -265,6 +281,7 @@
 
                 }
             });
+        }
 
         });
     </script>

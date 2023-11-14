@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->longText('message')->nullable();
+            $table->integer('car_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

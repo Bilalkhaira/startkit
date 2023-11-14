@@ -1,0 +1,1 @@
+<a href="{{ route('cars.show' ,$user->id) }}">View</a>

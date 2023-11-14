@@ -37,26 +37,30 @@ class CarController extends Controller
     public function store(Request $request)
     {
         try {
-            if(!empty($request->model3)){
-                $carModel = CarModel::find($request->model3);
-                $model = $carModel->name;
-
-                $decodeModel = $request->model;
-                $decodeModel[] = $request->model3;
-            } else {
-                $carModel = CarModel::find($request->model[1]);
-                $model = $carModel->name;
-                $decodeModel = $request->model;
+            if(!empty($request->other_model)){
+                $model = $request->other_model;
+                $decodeModel[] = $request->model[0];
             }
-
-            
+            else {
+                if(!empty($request->model3)){
+                    $carModel = CarModel::find($request->model3);
+                    $model = $carModel->name;
+    
+                    $decodeModel = $request->model;
+                    $decodeModel[] = $request->model3;
+                } else {
+                    $carModel = CarModel::find($request->model[1]);
+                    $model = $carModel->name;
+                    $decodeModel = $request->model;
+                }
+            }
 
             $newRecord = Car::create([
                 'created_by' => auth()->user()->id ?? '',
-                'seller_name' => $request->seller_name ?? '',
-                'seller_phone' => $request->seller_phone ?? '',
-                'seller_address' => $request->seller_address ?? '',
-                'seller_email' => $request->seller_email ?? '',
+                'seller_name' => auth()->user()->name ?? '',
+                'seller_phone' => auth()->user()->phone_no ?? '',
+                'seller_address' => auth()->user()->address ?? '',
+                'seller_email' => auth()->user()->email ?? '',
                 'vehicle_name' => $model ?? '',
                 'vehicle_price' => $request->vehicle_price ?? '',
                 'gearbox' => $request->gearbox ?? '',
@@ -177,25 +181,32 @@ class CarController extends Controller
     public function update(Request $request)
     {
         try {
-            if(!empty($request->model3)){
-                $carModel = CarModel::find($request->model3);
-                $model = $carModel->name;
 
-                $decodeModel = $request->model;
-                $decodeModel[] = $request->model3;
-            } else {
-                $carModel = CarModel::find($request->model[1]);
-                $model = $carModel->name;
-                $decodeModel = $request->model;
+            if(!empty($request->other_model)){
+                $model = $request->other_model;
+                $decodeModel[] = $request->model[0];
+            }
+            else {
+                if(!empty($request->model3)){
+                    $carModel = CarModel::find($request->model3);
+                    $model = $carModel->name;
+    
+                    $decodeModel = $request->model;
+                    $decodeModel[] = $request->model3;
+                } else {
+                    $carModel = CarModel::find($request->model[1]);
+                    $model = $carModel->name;
+                    $decodeModel = $request->model;
+                }
             }
 
             $updateRecord = Car::find($request->updateId);
 
             $updateRecord->update([
-                'seller_name' => $request->seller_name ?? '',
-                'seller_phone' => $request->seller_phone ?? '',
-                'seller_address' => $request->seller_address ?? '',
-                'seller_email' => $request->seller_email ?? '',
+                // 'seller_name' => $request->seller_name ?? '',
+                // 'seller_phone' => $request->seller_phone ?? '',
+                // 'seller_address' => $request->seller_address ?? '',
+                // 'seller_email' => $request->seller_email ?? '',
                 'vehicle_name' => $model ?? '',
                 'vehicle_price' => $request->vehicle_price ?? '',
                 'gearbox' => $request->gearbox ?? '',
