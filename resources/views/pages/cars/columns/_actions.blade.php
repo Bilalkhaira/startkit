@@ -18,6 +18,12 @@
             Edit
         </a>
     </div>
+
+    <div class="menu-item px-3">
+        <a href="{{ route('car.copy', $user->id) }}" class="menu-link px-3">
+            Copy
+        </a>
+    </div>
     <!--end::Menu item-->
 
     <!--begin::Menu item-->

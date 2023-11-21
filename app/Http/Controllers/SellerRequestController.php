@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use File;
 use Exception;
+use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\SellerRequest;

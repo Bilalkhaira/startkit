@@ -161,12 +161,6 @@ class CarController extends Controller
             } else {
                 return view('pages.cars.edit', compact(['car', 'models', 'models2']));
             }
-
-
-
-
-
-
             
        } catch (Exception $e) {
             toastr()->error($e);
@@ -328,6 +322,75 @@ class CarController extends Controller
             $carModels = CarModel::where('parrent_id', $id)->get();
 
             return response()->json($carModels);
+       } catch (Exception $e) {
+            toastr()->error($e);
+
+            return redirect()->back();
+        }
+    }
+
+    public function copyCar($id)
+    {
+        
+        try {
+            $car = Car::with('images')->where('id', $id)->first();
+
+            $newRecord = Car::create([
+                'created_by' => auth()->user()->id ?? '',
+                'seller_name' => auth()->user()->name ?? '',
+                'seller_phone' => auth()->user()->phone_no ?? '',
+                'seller_address' => auth()->user()->address ?? '',
+                'seller_email' => auth()->user()->email ?? '',
+                'vehicle_name' => $car->vehicle_name ?? '',
+                'vehicle_price' => $car->vehicle_price ?? '',
+                'gearbox' => $car->gearbox ?? '',
+                'first_registration' => $car->first_registration ?? '',
+                'power' => $car->power ?? '',
+                'body_type' => $car->body_type ?? '',
+                'type' => $car->type ?? '',
+                'drivetrain' => $car->drivetrain ?? '',
+                'seats' => $car->seats ?? '',
+                'doors' => $car->doors ?? '',
+                'offer_number' => $car->offer_number ?? '',
+                'warranty' => $car->warranty ?? '',
+                'mileage' => $car->mileage ?? '',
+                'engine_size' => $car->engine_size ?? '',
+                'gears' => $car->gears ?? '',
+                'cylinders' => $car->cylinders ?? '',
+                'empty_weight' => $car->empty_weight ?? '',
+                'fuel_type' => $car->fuel_type ?? '',
+                'fuel_consumption_2' => $car->fuel_consumption2 ?? '',
+                'COemissions' => $car->COemissions ?? '',
+                'emission_class' => $car->emission_class ?? '',
+                'comfort_convenience' => $car->comfort_convenience ?? '',
+                'entertainment_media' => $car->entertainment_media ?? '',
+                'safety_security' => $car->safety_security ?? '',
+                'extras' => $car->extras ?? '',
+                'colour' => $car->colour ?? '',
+                'manufacturer_colour' => $car->manufacturer_colour ?? '',
+                'upholstery_colour' => $car->upholstery_colour ?? '',
+                'upholstery' => $car->upholstery ?? '',
+                'description' => $car->vehicle_description ?? '',
+                'service_history' => $car->service_history ?? '',
+                'non_smoker' => $car->non_smoker ?? '',
+                'models' => $car->models ?? '',
+            ]);
+
+            if (!empty($car->images[0])) {
+                foreach ($car->images as $image) {
+
+                    CarImages::create([
+                        'car_id' => $newRecord->id ?? '',
+                        'images' => $image->images ?? ''
+                    ]);
+                }
+            }
+
+            toastr()->success('Record Duplicate Successfully');
+
+            return redirect()->route('cars.index');
+            
+            
        } catch (Exception $e) {
             toastr()->error($e);
 

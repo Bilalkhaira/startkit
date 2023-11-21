@@ -17,19 +17,19 @@ class CarApiController extends Controller
         try{
             if(!empty($request->all())){
                 if(!empty($request->model) && !empty($request->max) && !empty($request->min)){ 
-                    $cars = Car::where('vehicle_name', $request->model)
+                    $cars = Car::where('vehicle_name', 'LIKE', '%' . urldecode($request->model) . '%')
                             ->whereBetween('vehicle_price', [$request->min, $request->max])
                             ->with('images')->get();
                  }
                 
                 elseif(!empty($request->model) && !empty($request->price)){
-                    $cars = Car::where('vehicle_name', $request->model)
+                    $cars = Car::where('vehicle_name', 'LIKE', '%' . urldecode($request->model) . '%')
                             ->where('vehicle_price', $request->price)
                             ->with('images')->get();
                  }
 
                 elseif(!empty($request->model)){ 
-                    $cars = Car::where('vehicle_name', $request->model)
+                    $cars = Car::where('vehicle_name', 'LIKE', '%' . urldecode($request->model) . '%')
                             ->with('images')->get();
                  } 
 
@@ -79,7 +79,12 @@ class CarApiController extends Controller
 
            $car['image_path'] = 'https://001cars.mradevelopers.com/images/';
 
-            return response()->json($car);
+            if(!empty($car)){
+                    return response()->json($car);
+            } else {
+                $success['status'] =  404;
+                return response()->json($success);
+            }
 
         }catch (Exception $e){
 

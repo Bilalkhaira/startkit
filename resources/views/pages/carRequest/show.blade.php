@@ -5,7 +5,7 @@
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('car-request') }}
+    {{ Breadcrumbs::render('car-request-view') }}
     @endsection
 
 

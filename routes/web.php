@@ -62,10 +62,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::resource('cars', CarController::class);
+    Route::get('/copy-car/{id?}', [CarController::class, 'copyCar'])->name('car.copy');
     Route::resource('car-request', CarRequestsController::class);
     Route::resource('seller-request', SellerRequestController::class);
     Route::resource('contact-request', ContactRequestController::class);
     Route::resource('blogs', BlogController::class);
+    
     Route::post('/blog-update', [BlogController::class, 'blogUpdate'])->name('blogUpdate');
     Route::get('/imgDelete/{id?}', [CarController::class, 'imgDelete'])->name('cars.imgDelete');
     Route::get('/getModels/{id?}', [CarController::class, 'getModels'])->name('getModels');

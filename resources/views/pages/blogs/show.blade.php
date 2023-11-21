@@ -5,7 +5,7 @@
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('blogs') }}
+    {{ Breadcrumbs::render('blogs-view') }}
     @endsection
 
     <!--begin::Layout-->

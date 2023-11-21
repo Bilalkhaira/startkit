@@ -45,7 +45,7 @@ class SellerRequestDataTable extends DataTable
      */
     public function query(SellerRequest $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('car');
     }
 
     /**
@@ -74,7 +74,7 @@ class SellerRequestDataTable extends DataTable
             Column::make('name')->title('Name'),
             Column::make('phone')->title('Contact No'),
             Column::make('email')->title('Email'),
-            Column::computed('view_car')->title('View Requested Car'),
+            Column::computed('view_car')->title('Car Detail'),
             Column::computed('action')
                 ->addClass('text-end text-nowrap')
                 ->exportable(false)

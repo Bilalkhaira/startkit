@@ -5,7 +5,7 @@
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('cars') }}
+    {{ Breadcrumbs::render('cars.show') }}
     @endsection
 
     <div class="card mb-5">

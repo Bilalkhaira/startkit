@@ -10,8 +10,8 @@
 				<!-- <span class="fs-4 fw-semibold text-gray-400 me-1 align-self-start">$</span> -->
 				<!--end::Currency-->
 				<!--begin::Amount-->
-				@if(!empty($contacts))
-				<span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">{{ count($contacts)}}</span>
+				@if(!empty($dream_cars))
+				<span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">{{ count($dream_cars)}}</span>
 				@else
 				<span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">0</span>
 				@endif
@@ -22,7 +22,7 @@
 			</div>
 			<!--end::Info-->
 			<!--begin::Subtitle-->
-			<span class="text-gray-400 pt-1 fw-semibold fs-6">Total Contact Us Requests</span>
+			<span class="text-gray-400 pt-1 fw-semibold fs-6">Total Dream Car Requests</span>
 			<!--end::Subtitle-->
 		</div>
 		<!--end::Title-->

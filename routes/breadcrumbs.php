@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\Car;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
-use Spatie\Permission\Models\Role;
 
 // Home
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
@@ -37,32 +38,68 @@ Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail,
 // Home > Dashboard > Cars 
 Breadcrumbs::for('cars', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Cars', route('dashboard'));
+    $trail->push('Cars', route('cars.index'));
 });
+
+Breadcrumbs::for('cars.show', function (BreadcrumbTrail $trail) {
+    $trail->parent('cars');
+    $trail->push('View', route('cars.index'));
+});
+
+Breadcrumbs::for('cars.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('cars');
+    $trail->push('Add New Car', route('cars.index'));
+});
+
+Breadcrumbs::for('cars.edit', function (BreadcrumbTrail $trail) {
+    $trail->parent('cars');
+    $trail->push('Update', route('cars.index'));
+});
+
+
 
 
 // Home > Dashboard > Cars 
 Breadcrumbs::for('car-request', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Dream Car Request', route('dashboard'));
+    $trail->push('Dream Car Request', route('car-request.index'));
+});
+
+Breadcrumbs::for('car-request-view', function (BreadcrumbTrail $trail) {
+    $trail->parent('car-request');
+    $trail->push('View', route('car-request.index'));
 });
 
 // Home > Dashboard > Cars 
 Breadcrumbs::for('seller-request', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Seller Request', route('dashboard'));
+    $trail->push('Seller Request', route('seller-request.index'));
+});
+
+Breadcrumbs::for('seller-request-view', function (BreadcrumbTrail $trail) {
+    $trail->parent('seller-request');
+    $trail->push('View', route('seller-request.index'));
 });
 
 // Home > Dashboard > Cars 
 Breadcrumbs::for('contact-request', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Contact Request', route('dashboard'));
+    $trail->push('Contact Request', route('contact-request.index'));
+});
+
+Breadcrumbs::for('contact-request-view', function (BreadcrumbTrail $trail) {
+    $trail->parent('contact-request');
+    $trail->push('View', route('contact-request.index'));
 });
 
 // Home > Dashboard > Cars 
 Breadcrumbs::for('blogs', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Blog', route('dashboard'));
+    $trail->push('Blog', route('blogs.index'));
+});
+Breadcrumbs::for('blogs-view', function (BreadcrumbTrail $trail) {
+    $trail->parent('blogs');
+    $trail->push('View', route('blogs.index'));
 });
 // Home > Dashboard > User Management > Roles
 Breadcrumbs::for('user-management.roles.index', function (BreadcrumbTrail $trail) {

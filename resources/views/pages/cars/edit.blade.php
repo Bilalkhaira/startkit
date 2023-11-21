@@ -5,7 +5,7 @@
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('cars') }}
+    {{ Breadcrumbs::render('cars.edit') }}
     @endsection
 
     <div class="card">
@@ -284,6 +284,7 @@
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                        <button type="submit" id="nextBtn">Submit</button>
                         <input type="hidden" name="updateId" value="{{ $car->id ?? ''}}">
                     </div>
                 </div>
@@ -424,7 +425,7 @@
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
+            // document.getElementById("nextBtn").innerHTML = "Submit";
         } else {
             document.getElementById("nextBtn").innerHTML = "Next";
         }
