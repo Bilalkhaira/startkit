@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use App\Models\User;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -23,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        ResetPassword::createUrlUsing(function (User $user, string $token) {
+            return 'https://001cars-web.vercel.app/reset-password?token='.$token;
+        });
     }
 }

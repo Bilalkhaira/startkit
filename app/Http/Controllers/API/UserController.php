@@ -109,76 +109,76 @@ class UserController extends Controller
         }
     }
 
-    public function submitForgetPasswordForm(Request $request)
-    {
+    // public function submitForgetPasswordForm(Request $request)
+    // {
 
-        try {
-            $user = User::where('email', $request->email)->first();
-            if (empty($user)) {
-                $success['status'] =  400;
-                $success['message'] =  'This user is not exit please registor';
-                return response()->json($success);
-            } else {
+    //     try {
+    //         $user = User::where('email', $request->email)->first();
+    //         if (empty($user)) {
+    //             $success['status'] =  400;
+    //             $success['message'] =  'This user is not exit please registor';
+    //             return response()->json($success);
+    //         } else {
 
-                $token = Str::random(64);
+    //             $token = Str::random(64);
 
-                PasswordReset::create([
-                    'email' => $request->email,
-                    'token' => $token,
-                    'created_at' => Carbon::now()
-                ]);
+    //             PasswordReset::create([
+    //                 'email' => $request->email,
+    //                 'token' => $token,
+    //                 'created_at' => Carbon::now()
+    //             ]);
 
-                // Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
-                //     $message->to($request->email);
-                //     $message->subject('Reset Password');
-                // });
+    //             // Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
+    //             //     $message->to($request->email);
+    //             //     $message->subject('Reset Password');
+    //             // });
 
-                return response()->json($token);
-            }
-        } catch (Exception $e) {
+    //             return response()->json($token);
+    //         }
+    //     } catch (Exception $e) {
 
-            $success['status'] =  400;
-            $success['message'] =  $e->getMessage();
-            return response()->json($success);
-        }
-    }
+    //         $success['status'] =  400;
+    //         $success['message'] =  $e->getMessage();
+    //         return response()->json($success);
+    //     }
+    // }
 
-    public function submitResetPasswordForm(Request $request)
-    {
-        $user = User::where('email', $request->email)->first();
-        if (empty($user)) {
-            $success['status'] =  400;
-            $success['message'] =  'This user is not exit please registor';
-            return response()->json($success);
-        }
+    // public function submitResetPasswordForm(Request $request)
+    // {
+    //     $user = User::where('email', $request->email)->first();
+    //     if (empty($user)) {
+    //         $success['status'] =  400;
+    //         $success['message'] =  'This user is not exit please registor';
+    //         return response()->json($success);
+    //     }
 
-        if ($request->password != $request->password_confirmation) {
-            $success['status'] =  400;
-            $success['message'] =  'Password and confirm password are not same';
-            return response()->json($success);
-        }
+    //     if ($request->password != $request->password_confirmation) {
+    //         $success['status'] =  400;
+    //         $success['message'] =  'Password and confirm password are not same';
+    //         return response()->json($success);
+    //     }
 
-        $updatePassword = PasswordReset::where([
-            'email' => $request->email,
-            'token' => $request->token
-        ])
-            ->first();
+    //     $updatePassword = PasswordReset::where([
+    //         'email' => $request->email,
+    //         'token' => $request->token
+    //     ])
+    //         ->first();
 
-        if (!$updatePassword) {
-            $success['status'] =  400;
-            $success['message'] =  'invalid token';
-            return response()->json($success);
-        }
+    //     if (!$updatePassword) {
+    //         $success['status'] =  400;
+    //         $success['message'] =  'invalid token';
+    //         return response()->json($success);
+    //     }
 
-        $user = User::where('email', $request->email)
-            ->update(['password' => Hash::make($request->password)]);
+    //     $user = User::where('email', $request->email)
+    //         ->update(['password' => Hash::make($request->password)]);
 
-        PasswordReset::where(['email' => $request->email])->delete();
+    //     PasswordReset::where(['email' => $request->email])->delete();
 
-        $success['status'] =  200;
-        $success['message'] =  'true';
-        return response()->json($success);
-    }
+    //     $success['status'] =  200;
+    //     $success['message'] =  'true';
+    //     return response()->json($success);
+    // }
 
     public function updateUserProfile(Request $request)
     {
